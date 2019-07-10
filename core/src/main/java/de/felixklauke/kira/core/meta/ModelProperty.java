@@ -1,5 +1,7 @@
 package de.felixklauke.kira.core.meta;
 
+import de.felixklauke.kira.core.exception.KiraModelPropertyException;
+
 import java.lang.reflect.Field;
 
 public class ModelProperty<PropertyType> {
@@ -18,7 +20,7 @@ public class ModelProperty<PropertyType> {
     return field.getName();
   }
 
-  public Object getValue(Object model) {
+  public Object getValue(Object model) throws KiraModelPropertyException {
 
     if (!field.isAccessible()) {
       field.setAccessible(true);
@@ -27,13 +29,11 @@ public class ModelProperty<PropertyType> {
     try {
       return field.get(model);
     } catch (IllegalAccessException e) {
-      e.printStackTrace();
+      throw new KiraModelPropertyException("Couldn't get model property.", e);
     }
-
-    return null;
   }
 
-  public <ModelType> void set(ModelType model, Object value) {
+  public <ModelType> void set(ModelType model, Object value) throws KiraModelPropertyException {
 
     if (!field.isAccessible()) {
       field.setAccessible(true);
@@ -42,7 +42,7 @@ public class ModelProperty<PropertyType> {
     try {
       field.set(model, value);
     } catch (IllegalAccessException e) {
-      e.printStackTrace();
+      throw new KiraModelPropertyException("Couldn't set model property.", e);
     }
   }
 }

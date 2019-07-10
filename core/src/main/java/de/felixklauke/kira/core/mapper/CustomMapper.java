@@ -1,5 +1,6 @@
 package de.felixklauke.kira.core.mapper;
 
+import de.felixklauke.kira.core.exception.KiraModelException;
 import de.felixklauke.kira.core.io.KiraReader;
 import de.felixklauke.kira.core.io.KiraWriter;
 import de.felixklauke.kira.core.io.SimpleKiraReader;
@@ -31,7 +32,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
   }
 
   @Override
-  public void write(KiraWriter kiraWriter, String propertyName, ModelType model) {
+  public void write(KiraWriter kiraWriter, String propertyName, ModelType model) throws KiraModelException {
 
     // Get meta
     Class<ModelType> modelClass = getModelClass();
@@ -64,7 +65,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
   }
 
   @Override
-  public ModelType read(KiraReader reader, String propertyName) {
+  public ModelType read(KiraReader reader, String propertyName) throws KiraModelException {
 
     // Read data
     Map<String, Object> data = reader.readValue(propertyName);
@@ -82,9 +83,10 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
 
     try {
       model = modelClass.newInstance();
-    } catch (InstantiationException | IllegalAccessException e) {
-      e.printStackTrace();
-      return null;
+    } catch (InstantiationException e) {
+      throw new KiraModelException("Couldn't create model instance. Make sure there is a non-argument constructor available.", e);
+    } catch (IllegalAccessException e) {
+      throw new KiraModelException("Couldn't create model instance.", e);
     }
 
     // Read properties

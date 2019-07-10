@@ -1,9 +1,8 @@
 package de.felixklauke.kira.core.mapper;
 
+import de.felixklauke.kira.core.exception.KiraModelException;
 import de.felixklauke.kira.core.io.KiraReader;
 import de.felixklauke.kira.core.io.KiraWriter;
-
-import java.util.Map;
 
 /**
  * A mapper transforms a data type to its map representation and vice versa.
@@ -21,7 +20,7 @@ public interface Mapper<ContentType> {
    */
   Class<ContentType> getModelClass();
 
-  ContentType read(KiraReader reader, String propertyName);
+  ContentType read(KiraReader reader, String propertyName) throws KiraModelException;
 
   /**
    * Write the model.
@@ -29,5 +28,5 @@ public interface Mapper<ContentType> {
    * @param kiraWriter The writer.
    * @param propertyName
    */
-  void write(KiraWriter kiraWriter, String propertyName, ContentType model);
+  void write(KiraWriter kiraWriter, String propertyName, ContentType model) throws KiraModelException;
 }

@@ -1,15 +1,11 @@
 package de.felixklauke.kira.core.mapper;
 
-import de.felixklauke.kira.core.mapper.standard.DateMapper;
-import de.felixklauke.kira.core.mapper.standard.IntegerMapper;
-import de.felixklauke.kira.core.mapper.standard.StringMapper;
-import de.felixklauke.kira.core.mapper.standard.UUIDMapper;
+import de.felixklauke.kira.core.mapper.standard.*;
 import de.felixklauke.kira.core.meta.ModelMetaManager;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
 
 public class MapperManagerImpl implements MapperManager {
 
@@ -20,11 +16,29 @@ public class MapperManagerImpl implements MapperManager {
     this.metaManager = metaManager;
     this.mappers = mappers;
 
+    // Standard java types
     mappers.put(String.class, new StringMapper());
-    mappers.put(int.class, new IntegerMapper());
-    mappers.put(Integer.class, new IntegerMapper());
     mappers.put(UUID.class, new UUIDMapper());
     mappers.put(Date.class, new DateMapper());
+    mappers.put(URL.class, new URLMapper());
+    mappers.put(URI.class, new URIMapper());
+    mappers.put(List.class, new ListMapper());
+
+    // Primitives and Wrapper
+    mappers.put(int.class, new IntegerMapper());
+    mappers.put(Integer.class, new IntegerMapper());
+    mappers.put(boolean.class, new BooleanMapper());
+    mappers.put(Boolean.class, new BooleanMapper());
+    mappers.put(long.class, new LongMapper());
+    mappers.put(Long.class, new LongMapper());
+    mappers.put(short.class, new ShortMapper());
+    mappers.put(Short.class, new ShortMapper());
+    mappers.put(byte.class, new ByteMapper());
+    mappers.put(Byte.class, new ByteMapper());
+    mappers.put(char.class, new CharMapper());
+    mappers.put(Character.class, new CharMapper());
+    mappers.put(double.class, new DoubleMapper());
+    mappers.put(Double.class, new DoubleMapper());
   }
 
   public MapperManagerImpl(ModelMetaManager metaManager) {

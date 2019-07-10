@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 
 public class SimpleKira implements Kira {
 
+  private static final String ROOT_MAP_NAME = "root";
+
   private final Logger logger = Logger.getLogger(SimpleKira.class.getSimpleName());
   private final MapperManager mapperManager;
 
@@ -32,9 +34,9 @@ public class SimpleKira implements Kira {
     KiraWriter writer = new SimpleKiraWriter(data);
 
     // Serialize
-    mapper.write(writer, "root", model);
+    mapper.write(writer, ROOT_MAP_NAME, model);
 
-    return (Map<String, Object>) data.get("root");
+    return (Map<String, Object>) data.get(ROOT_MAP_NAME);
   }
 
   @Override
@@ -50,6 +52,6 @@ public class SimpleKira implements Kira {
     // Construct model and reader
     KiraReader reader = new SimpleKiraReader(root);
 
-    return mapper.read(reader, "root");
+    return mapper.read(reader, ROOT_MAP_NAME);
   }
 }

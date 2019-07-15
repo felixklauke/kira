@@ -4,8 +4,6 @@ import de.felixklauke.kira.core.io.KiraReader;
 import de.felixklauke.kira.core.io.KiraWriter;
 import de.felixklauke.kira.core.mapper.Mapper;
 
-import java.util.Map;
-
 public abstract class AbstractMapper<ContentType> implements Mapper<ContentType> {
 
   @Override

@@ -8,7 +8,6 @@ import de.felixklauke.kira.core.io.KiraWriter;
  * A mapper transforms a data type to its map representation and vice versa.
  *
  * @param <ContentType> The generic type of the data.
- *
  * @author Felix Klauke (info@felix-klauke.de)
  */
 public interface Mapper<ContentType> {
@@ -25,7 +24,7 @@ public interface Mapper<ContentType> {
   /**
    * Write the model.
    *
-   * @param kiraWriter The writer.
+   * @param kiraWriter   The writer.
    * @param propertyName
    */
   void write(KiraWriter kiraWriter, String propertyName, ContentType model) throws KiraModelException;

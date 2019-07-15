@@ -6,7 +6,6 @@ import de.felixklauke.kira.core.mapper.Mapper;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 
 public class URLMapper implements Mapper<URL> {
 

@@ -1,6 +1,5 @@
 package de.felixklauke.kira.core.io;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class SimpleKiraReader implements KiraReader {

@@ -13,10 +13,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A custom mapper that can map arbitrary objects by working through their properties.
+ *
+ * @param <ModelType> The generic type of the mode.
+ */
 public class CustomMapper<ModelType> implements Mapper<ModelType> {
 
+  /**
+   * The class of the model.
+   */
   private final Class<ModelType> modelClass;
+
+  /**
+   * The manager of the model meta information.
+   */
   private final ModelMetaManager metaManager;
+
+  /**
+   * The manager of all available mappers.
+   */
   private final MapperManager mapperManager;
 
   public CustomMapper(Class<ModelType> modelClass, ModelMetaManager metaManager, MapperManager mapperManager) {

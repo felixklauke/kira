@@ -55,7 +55,7 @@ public class SimpleKira implements Kira {
       mapper.write(writer, ROOT_MAP_NAME, model);
     } catch (KiraModelException e) {
       logger.log(Level.SEVERE, "Couldn't serialize model.", e);
-      return null;
+      return new HashMap<>();
     }
 
     return (Map<String, Object>) data.get(ROOT_MAP_NAME);

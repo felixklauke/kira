@@ -1,10 +1,9 @@
 package de.felixklauke.kira.core.meta;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ModelMetaManagerImpl implements ModelMetaManager {
 
@@ -32,13 +31,12 @@ public class ModelMetaManagerImpl implements ModelMetaManager {
 
   private <ModelType> ModelMeta<ModelType> readModelMeta(Class<ModelType> modelClass) {
 
-    List<ModelProperty> modelProperties = new ArrayList<>();
+    List<ModelProperty> modelProperties;
 
     Field[] declaredFields = modelClass.getDeclaredFields();
-    for (Field declaredField : declaredFields) {
-      ModelProperty property = new ModelProperty(declaredField);
-      modelProperties.add(property);
-    }
+    modelProperties = Arrays.stream(declaredFields)
+      .map((Function<Field, ModelProperty>) ModelProperty::new)
+      .collect(Collectors.toList());
 
     return new ModelMeta<>(modelProperties);
   }

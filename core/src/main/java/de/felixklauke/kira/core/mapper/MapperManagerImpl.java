@@ -25,6 +25,8 @@ public class MapperManagerImpl implements MapperManager {
     mappers.put(List.class, new ListMapper());
     mappers.put(Map.class, new MapMapper());
     mappers.put(HashMap.class, new MapMapper());
+    mappers.put(Set.class, new SetMapper());
+    mappers.put(HashSet.class, new SetMapper());
 
     // Primitives and Wrapper
     mappers.put(int.class, new IntegerMapper());

@@ -48,6 +48,12 @@ public class MapperManagerImpl implements MapperManager {
   }
 
   @Override
+  public <ContentType> void addMapper(Mapper<ContentType> mapper) {
+
+    mappers.put(mapper.getModelClass(), mapper);
+  }
+
+  @Override
   public <ContentType> Mapper<ContentType> getMapper(Class<ContentType> modelClass) {
 
     Mapper<?> mapper = mappers.get(modelClass);

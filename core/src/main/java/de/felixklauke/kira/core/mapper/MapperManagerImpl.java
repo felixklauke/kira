@@ -23,6 +23,8 @@ public class MapperManagerImpl implements MapperManager {
     mappers.put(URL.class, new URLMapper());
     mappers.put(URI.class, new URIMapper());
     mappers.put(List.class, new ListMapper());
+    mappers.put(Map.class, new MapMapper());
+    mappers.put(HashMap.class, new MapMapper());
 
     // Primitives and Wrapper
     mappers.put(int.class, new IntegerMapper());

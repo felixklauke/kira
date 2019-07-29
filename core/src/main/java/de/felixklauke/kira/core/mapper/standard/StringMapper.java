@@ -1,6 +1,6 @@
-package de.felixklauke.kira.core.mapper.standard;
+package com.felixklauke.kira.core.mapper.standard;
 
-import de.felixklauke.kira.core.mapper.Mapper;
+import com.felixklauke.kira.core.mapper.Mapper;
 
 public class StringMapper extends AbstractMapper<String> implements Mapper<String> {
 

@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.util;
+package com.felixklauke.kira.core.util;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

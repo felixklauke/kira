@@ -1,13 +1,13 @@
-package de.felixklauke.kira.core.mapper;
+package com.felixklauke.kira.core.mapper;
 
-import de.felixklauke.kira.core.exception.KiraModelException;
-import de.felixklauke.kira.core.io.KiraReader;
-import de.felixklauke.kira.core.io.KiraWriter;
-import de.felixklauke.kira.core.io.SimpleKiraReader;
-import de.felixklauke.kira.core.io.SimpleKiraWriter;
-import de.felixklauke.kira.core.meta.ModelMeta;
-import de.felixklauke.kira.core.meta.ModelMetaManager;
-import de.felixklauke.kira.core.meta.ModelProperty;
+import com.felixklauke.kira.core.exception.KiraModelException;
+import com.felixklauke.kira.core.io.KiraReader;
+import com.felixklauke.kira.core.io.KiraWriter;
+import com.felixklauke.kira.core.io.SimpleKiraReader;
+import com.felixklauke.kira.core.io.SimpleKiraWriter;
+import com.felixklauke.kira.core.meta.ModelMeta;
+import com.felixklauke.kira.core.meta.ModelMetaManager;
+import com.felixklauke.kira.core.meta.ModelProperty;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

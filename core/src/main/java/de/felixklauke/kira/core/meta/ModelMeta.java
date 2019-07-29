@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.meta;
+package com.felixklauke.kira.core.meta;
 
 import java.util.List;
 

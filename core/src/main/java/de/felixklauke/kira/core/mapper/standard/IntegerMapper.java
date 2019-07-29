@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.mapper.standard;
+package com.felixklauke.kira.core.mapper.standard;
 
 public class IntegerMapper extends AbstractMapper<Integer> {
 

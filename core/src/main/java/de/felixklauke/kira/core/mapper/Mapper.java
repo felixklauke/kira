@@ -1,8 +1,8 @@
-package de.felixklauke.kira.core.mapper;
+package com.felixklauke.kira.core.mapper;
 
-import de.felixklauke.kira.core.exception.KiraModelException;
-import de.felixklauke.kira.core.io.KiraReader;
-import de.felixklauke.kira.core.io.KiraWriter;
+import com.felixklauke.kira.core.exception.KiraModelException;
+import com.felixklauke.kira.core.io.KiraReader;
+import com.felixklauke.kira.core.io.KiraWriter;
 
 import java.lang.reflect.Type;
 

@@ -1,8 +1,8 @@
-package de.felixklauke.kira.core.mapper.standard;
+package com.felixklauke.kira.core.mapper.standard;
 
-import de.felixklauke.kira.core.io.KiraReader;
-import de.felixklauke.kira.core.io.KiraWriter;
-import de.felixklauke.kira.core.mapper.Mapper;
+import com.felixklauke.kira.core.io.KiraReader;
+import com.felixklauke.kira.core.io.KiraWriter;
+import com.felixklauke.kira.core.mapper.Mapper;
 
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;

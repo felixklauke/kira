@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.io;
+package com.felixklauke.kira.core.io;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.mapper;
+package com.felixklauke.kira.core.mapper;
 
 public interface MapperManager {
 

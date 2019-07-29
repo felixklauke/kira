@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.meta;
+package com.felixklauke.kira.core.meta;
 
 /**
  * @author Felix Klauke (info@felix-klauke.de)

@@ -1,10 +1,10 @@
-package de.felixklauke.kira.core;
+package com.felixklauke.kira.core;
 
-import de.felixklauke.kira.core.mapper.Mapper;
-import de.felixklauke.kira.core.mapper.MapperManager;
-import de.felixklauke.kira.core.mapper.MapperManagerImpl;
-import de.felixklauke.kira.core.meta.ModelMetaManager;
-import de.felixklauke.kira.core.meta.ModelMetaManagerImpl;
+import com.felixklauke.kira.core.mapper.Mapper;
+import com.felixklauke.kira.core.mapper.MapperManager;
+import com.felixklauke.kira.core.mapper.MapperManagerImpl;
+import com.felixklauke.kira.core.meta.ModelMetaManager;
+import com.felixklauke.kira.core.meta.ModelMetaManagerImpl;
 
 import java.util.Collections;
 import java.util.List;

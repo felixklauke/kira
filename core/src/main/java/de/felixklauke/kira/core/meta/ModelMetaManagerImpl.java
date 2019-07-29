@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.meta;
+package com.felixklauke.kira.core.meta;
 
 import java.lang.reflect.Field;
 import java.util.*;

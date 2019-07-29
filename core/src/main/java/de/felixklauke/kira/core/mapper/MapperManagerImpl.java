@@ -1,7 +1,7 @@
-package de.felixklauke.kira.core.mapper;
+package com.felixklauke.kira.core.mapper;
 
-import de.felixklauke.kira.core.mapper.standard.*;
-import de.felixklauke.kira.core.meta.ModelMetaManager;
+import com.felixklauke.kira.core.mapper.standard.*;
+import com.felixklauke.kira.core.meta.ModelMetaManager;
 
 import java.net.URI;
 import java.net.URL;

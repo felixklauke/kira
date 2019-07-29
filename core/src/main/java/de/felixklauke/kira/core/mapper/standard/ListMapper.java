@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.mapper.standard;
+package com.felixklauke.kira.core.mapper.standard;
 
 import java.util.List;
 

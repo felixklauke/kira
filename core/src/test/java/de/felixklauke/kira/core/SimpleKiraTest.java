@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core;
+package com.felixklauke.kira.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

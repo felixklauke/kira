@@ -1,4 +1,4 @@
-package de.felixklauke.kira.core.exception;
+package com.felixklauke.kira.core.exception;
 
 public class KiraException extends Exception {
 

@@ -13,6 +13,7 @@
     <module>yaml</module>
     <module>json</module>
     <module>annotations</module>
+    <module>io</module>
   </modules>
 
   <properties>

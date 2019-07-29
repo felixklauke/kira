@@ -3,6 +3,7 @@ package de.felixklauke.kira.core.meta;
 import de.felixklauke.kira.core.exception.KiraModelPropertyException;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 public class ModelProperty<PropertyType> {
 
@@ -18,6 +19,10 @@ public class ModelProperty<PropertyType> {
 
   public String getName() {
     return field.getName();
+  }
+
+  public Field getField() {
+    return field;
   }
 
   public Object getValue(Object model) throws KiraModelPropertyException {
@@ -44,5 +49,10 @@ public class ModelProperty<PropertyType> {
     } catch (IllegalAccessException e) {
       throw new KiraModelPropertyException("Couldn't set model property.", e);
     }
+  }
+
+  public Type getGenericType() {
+
+    return field.getGenericType();
   }
 }

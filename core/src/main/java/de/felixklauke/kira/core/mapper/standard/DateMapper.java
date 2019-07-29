@@ -4,6 +4,7 @@ import de.felixklauke.kira.core.io.KiraReader;
 import de.felixklauke.kira.core.io.KiraWriter;
 import de.felixklauke.kira.core.mapper.Mapper;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ public class DateMapper implements Mapper<Date> {
   }
 
   @Override
-  public Date read(KiraReader reader, String propertyName) {
+  public Date read(KiraReader reader, String propertyName, Type genericType) {
 
     String date = reader.readValue(propertyName);
     try {

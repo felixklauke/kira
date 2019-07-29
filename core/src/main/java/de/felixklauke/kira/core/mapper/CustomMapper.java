@@ -9,6 +9,7 @@ import de.felixklauke.kira.core.meta.ModelMeta;
 import de.felixklauke.kira.core.meta.ModelMetaManager;
 import de.felixklauke.kira.core.meta.ModelProperty;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +82,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
   }
 
   @Override
-  public ModelType read(KiraReader reader, String propertyName) throws KiraModelException {
+  public ModelType read(KiraReader reader, String propertyName, Type genericType) throws KiraModelException {
 
     // Read data
     Map<String, Object> data = reader.readValue(propertyName);
@@ -113,10 +114,11 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
       KiraReader propertyReader = new SimpleKiraReader(data);
 
       Class propertyType = property.getType();
+      Type localGenericType = property.getGenericType();
       String localPropertyName = property.getName();
 
       Mapper mapper = mapperManager.getMapper(propertyType);
-      Object read = mapper.read(propertyReader, localPropertyName);
+      Object read = mapper.read(propertyReader, localPropertyName, localGenericType);
 
       property.set(model, read);
     }

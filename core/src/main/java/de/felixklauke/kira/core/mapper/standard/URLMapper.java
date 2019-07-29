@@ -4,6 +4,7 @@ import de.felixklauke.kira.core.io.KiraReader;
 import de.felixklauke.kira.core.io.KiraWriter;
 import de.felixklauke.kira.core.mapper.Mapper;
 
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -15,7 +16,7 @@ public class URLMapper implements Mapper<URL> {
   }
 
   @Override
-  public URL read(KiraReader reader, String propertyName) {
+  public URL read(KiraReader reader, String propertyName, Type genericType) {
 
     String value = reader.readValue(propertyName);
     try {

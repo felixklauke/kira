@@ -75,7 +75,7 @@ public class SimpleKira implements Kira {
     KiraReader reader = new SimpleKiraReader(root);
 
     try {
-      return mapper.read(reader, ROOT_MAP_NAME);
+      return mapper.read(reader, ROOT_MAP_NAME, modelClass);
     } catch (KiraModelException e) {
       logger.log(Level.SEVERE, "Couldn't deserialize model.", e
       );

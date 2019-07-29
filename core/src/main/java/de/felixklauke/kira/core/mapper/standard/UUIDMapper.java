@@ -4,6 +4,7 @@ import de.felixklauke.kira.core.io.KiraReader;
 import de.felixklauke.kira.core.io.KiraWriter;
 import de.felixklauke.kira.core.mapper.Mapper;
 
+import java.lang.reflect.Type;
 import java.util.UUID;
 
 public class UUIDMapper implements Mapper<UUID> {
@@ -14,7 +15,7 @@ public class UUIDMapper implements Mapper<UUID> {
   }
 
   @Override
-  public UUID read(KiraReader reader, String propertyName) {
+  public UUID read(KiraReader reader, String propertyName, Type genericType) {
 
     String value = reader.readValue(propertyName);
     return UUID.fromString(value);

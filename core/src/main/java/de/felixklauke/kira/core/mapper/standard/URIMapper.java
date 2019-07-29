@@ -4,6 +4,7 @@ import de.felixklauke.kira.core.io.KiraReader;
 import de.felixklauke.kira.core.io.KiraWriter;
 import de.felixklauke.kira.core.mapper.Mapper;
 
+import java.lang.reflect.Type;
 import java.net.URI;
 
 public class URIMapper implements Mapper<URI> {
@@ -14,7 +15,7 @@ public class URIMapper implements Mapper<URI> {
   }
 
   @Override
-  public URI read(KiraReader reader, String propertyName) {
+  public URI read(KiraReader reader, String propertyName, Type genericType) {
 
     String value = reader.readValue(propertyName);
     return URI.create(value);

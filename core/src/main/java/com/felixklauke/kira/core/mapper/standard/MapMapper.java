@@ -1,6 +1,7 @@
 package com.felixklauke.kira.core.mapper.standard;
 
 import com.felixklauke.kira.core.exception.KiraModelException;
+import com.felixklauke.kira.core.exception.KiraModelInvalidGenericsException;
 import com.felixklauke.kira.core.io.KiraReader;
 import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.SimpleKiraReader;
@@ -42,7 +43,7 @@ public class MapMapper extends AbstractMapper<Map> {
     // Get generic type
     Class<?>[] genericTypeClasses = TypeUtils.getGenericTypeClasses(genericType);
     if (genericTypeClasses.length != 2) {
-      throw new IllegalStateException("Invalid generic type arguments.");
+      throw new KiraModelInvalidGenericsException("Couldn't infer generic type of property " + propertyName + ".");
     }
 
     // Construct map

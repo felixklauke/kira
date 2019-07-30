@@ -28,15 +28,16 @@ public class MapMapper extends AbstractMapper<Map> {
   }
 
   @Override
-  public Map read(KiraReader reader, String propertyName, Type genericType) {
+  public Map read(KiraReader reader, String propertyName, Type genericType) throws KiraModelException {
 
-    Map content = super.read(reader, propertyName, genericType);
+    Map<String, Object> content = super.read(reader, propertyName, genericType);
 
     if (content == null) {
       return null;
     }
 
-    Map contentMap = new HashMap();
+    Map<String, Object> contentMap = new HashMap<>();
+    SimpleKiraReader embeddedKiraReader = new SimpleKiraReader(content);
 
     // Get generic type
     Class<?>[] genericTypeClasses = TypeUtils.getGenericTypeClasses(genericType);
@@ -45,37 +46,32 @@ public class MapMapper extends AbstractMapper<Map> {
     }
 
     // Construct map
-    Set<Map.Entry> entrySet = content.entrySet();
-    for (Map.Entry entry : entrySet) {
+    Set<Map.Entry<String, Object>> entrySet = content.entrySet();
+    for (Map.Entry<String, Object> entry : entrySet) {
       Class<?> genericValueClass = genericTypeClasses[1];
       Mapper<?> valueMapper = mapperManager.getMapper(genericValueClass);
 
-      try {
-        Object read = valueMapper.read(new SimpleKiraReader(content), entry.getKey().toString(), null);
-        contentMap.put(entry.getKey().toString(), read);
-      } catch (KiraModelException e) {
-        e.printStackTrace();
-      }
+      String key = entry.getKey();
+      Object read = valueMapper.read(embeddedKiraReader, key, null);
+      contentMap.put(key, read);
     }
 
     return contentMap;
   }
 
   @Override
-  public void write(KiraWriter kiraWriter, String propertyName, Map model) {
+  public void write(KiraWriter kiraWriter, String propertyName, Map model) throws KiraModelException {
 
-    Map contentMap = new HashMap();
+    Map<String, Object> contentMap = new HashMap<>();
     KiraWriter embeddedKiraWriter = new SimpleKiraWriter(contentMap);
 
     // Write map values
-    Set<Map.Entry> entrySet = model.entrySet();
-    for (Map.Entry entry : entrySet) {
-      Mapper valueMapper = mapperManager.getMapper(entry.getValue().getClass());
-      try {
-        valueMapper.write(embeddedKiraWriter, entry.getKey().toString(), entry.getValue());
-      } catch (KiraModelException e) {
-        e.printStackTrace();
-      }
+    Set<Map.Entry<String, Object>> entrySet = model.entrySet();
+    for (Map.Entry<String, Object> entry : entrySet) {
+      Object value = entry.getValue();
+      Mapper valueMapper = mapperManager.getMapper(value.getClass());
+      String key = entry.getKey();
+      valueMapper.write(embeddedKiraWriter, key, value);
     }
 
     super.write(kiraWriter, propertyName, contentMap);

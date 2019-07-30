@@ -1,6 +1,7 @@
 package com.felixklauke.kira.core.mapper;
 
 import com.felixklauke.kira.core.exception.KiraModelException;
+import com.felixklauke.kira.core.exception.KiraModelInstantiationException;
 import com.felixklauke.kira.core.io.KiraReader;
 import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.SimpleKiraReader;
@@ -101,7 +102,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
     try {
       model = modelClass.newInstance();
     } catch (InstantiationException e) {
-      throw new KiraModelException("Couldn't create model instance. Make sure there is a non-argument constructor available.", e);
+      throw new KiraModelInstantiationException("Couldn't create model instance. Make sure there is a non-argument constructor available.", e);
     } catch (IllegalAccessException e) {
       throw new KiraModelException("Couldn't create model instance.", e);
     }

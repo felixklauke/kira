@@ -1,14 +1,18 @@
 package com.felixklauke.kira.core;
 
+import com.felixklauke.kira.core.exception.KiraModelException;
+import com.felixklauke.kira.core.exception.KiraModelInstantiationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SimpleKiraTest {
 

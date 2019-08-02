@@ -8,6 +8,7 @@ import com.felixklauke.kira.core.meta.ModelMetaManagerImpl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class KiraFactory {
 
@@ -28,6 +29,8 @@ public class KiraFactory {
    * @return The kira instance.
    */
   public static Kira createKira(List<Mapper<?>> extraMappers) {
+
+    Objects.requireNonNull(extraMappers, "Extra mappers list cannot be null.");
 
     // Create dependencies
     ModelMetaManager modelMetaManager = new ModelMetaManagerImpl();

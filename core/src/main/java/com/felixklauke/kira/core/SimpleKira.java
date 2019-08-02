@@ -10,6 +10,7 @@ import com.felixklauke.kira.core.mapper.MapperManager;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,11 +37,16 @@ public class SimpleKira implements Kira {
    * @param mapperManager The mapper manager.
    */
   SimpleKira(MapperManager mapperManager) {
+
+    Objects.requireNonNull(mapperManager, "Mapper manager cannot be null.");
+
     this.mapperManager = mapperManager;
   }
 
   @Override
   public <ModelType> Map<String, Object> serialize(ModelType model) {
+
+    Objects.requireNonNull(model, "Cannot serialize null values.");
 
     // Get mapper
     Class<?> modelClass = model.getClass();
@@ -63,6 +69,9 @@ public class SimpleKira implements Kira {
 
   @Override
   public <ModelType> ModelType deserialize(Map<String, Object> data, Class<ModelType> modelClass) {
+
+    Objects.requireNonNull(data, "Data cannot be null.");
+    Objects.requireNonNull(modelClass, "Model class cannot be null.");
 
     // Construct root map
     Map<String, Object> root = new HashMap<>();

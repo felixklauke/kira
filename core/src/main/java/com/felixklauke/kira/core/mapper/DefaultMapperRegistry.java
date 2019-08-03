@@ -9,11 +9,11 @@ import java.util.*;
 
 public class DefaultMapperRegistry implements MapperRegistry {
 
-  private final ModelMetaRepository metaManager;
+  private final ModelMetaRepository metaRepository;
   private final Map<Class<?>, Mapper<?>> mappers;
 
-  public DefaultMapperRegistry(ModelMetaRepository metaManager, Map<Class<?>, Mapper<?>> mappers) {
-    this.metaManager = metaManager;
+  public DefaultMapperRegistry(ModelMetaRepository metaRepository, Map<Class<?>, Mapper<?>> mappers) {
+    this.metaRepository = metaRepository;
     this.mappers = mappers;
 
     // Standard java types
@@ -46,12 +46,14 @@ public class DefaultMapperRegistry implements MapperRegistry {
     mappers.put(Double.class, new DoubleMapper());
   }
 
-  public DefaultMapperRegistry(ModelMetaRepository metaManager) {
-    this(metaManager, new HashMap<>());
+  public DefaultMapperRegistry(ModelMetaRepository metaRepository) {
+    this(metaRepository, new HashMap<>());
   }
 
   @Override
   public <ContentType> void addMapper(Mapper<ContentType> mapper) {
+
+    Objects.requireNonNull(mapper, "Mapper cannot be null.");
 
     mappers.put(mapper.getModelClass(), mapper);
   }
@@ -59,10 +61,12 @@ public class DefaultMapperRegistry implements MapperRegistry {
   @Override
   public <ContentType> Mapper<ContentType> getMapper(Class<ContentType> modelClass) {
 
+    Objects.requireNonNull(modelClass, "Model class cannot be null.");
+
     Mapper<?> mapper = mappers.get(modelClass);
 
     if (mapper == null) {
-      mapper = new CustomMapper<>(modelClass, metaManager, this);
+      mapper = new CustomMapper<>(modelClass, metaRepository, this);
       mappers.put(modelClass, mapper);
     }
 

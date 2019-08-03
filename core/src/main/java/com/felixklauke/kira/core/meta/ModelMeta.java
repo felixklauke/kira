@@ -14,6 +14,7 @@ public class ModelMeta<ModelType> {
   }
 
   public List<ModelProperty> getProperties() {
-    return properties;
+
+    return List.copyOf(properties);
   }
 }

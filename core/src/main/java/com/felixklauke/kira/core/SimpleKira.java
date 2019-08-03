@@ -3,8 +3,8 @@ package com.felixklauke.kira.core;
 import com.felixklauke.kira.core.exception.KiraModelException;
 import com.felixklauke.kira.core.io.KiraReader;
 import com.felixklauke.kira.core.io.KiraWriter;
-import com.felixklauke.kira.core.io.SimpleKiraReader;
-import com.felixklauke.kira.core.io.SimpleKiraWriter;
+import com.felixklauke.kira.core.io.KiraMapReader;
+import com.felixklauke.kira.core.io.KiraMapWriter;
 import com.felixklauke.kira.core.mapper.Mapper;
 import com.felixklauke.kira.core.mapper.MapperRegistry;
 
@@ -54,7 +54,7 @@ public class SimpleKira implements Kira {
 
     // Construct data and writer
     Map<String, Object> data = new HashMap<>();
-    KiraWriter writer = new SimpleKiraWriter(data);
+    KiraWriter writer = new KiraMapWriter(data);
 
     // Serialize
     try {
@@ -81,7 +81,7 @@ public class SimpleKira implements Kira {
     Mapper<ModelType> mapper = mapperRegistry.getMapper(modelClass);
 
     // Construct model and reader
-    KiraReader reader = new SimpleKiraReader(root);
+    KiraReader reader = new KiraMapReader(root);
 
     try {
       return mapper.read(reader, ROOT_MAP_NAME, modelClass);

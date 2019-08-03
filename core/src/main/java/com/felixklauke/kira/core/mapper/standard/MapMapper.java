@@ -4,8 +4,8 @@ import com.felixklauke.kira.core.exception.KiraModelException;
 import com.felixklauke.kira.core.exception.KiraModelInvalidGenericsException;
 import com.felixklauke.kira.core.io.KiraReader;
 import com.felixklauke.kira.core.io.KiraWriter;
-import com.felixklauke.kira.core.io.SimpleKiraReader;
-import com.felixklauke.kira.core.io.SimpleKiraWriter;
+import com.felixklauke.kira.core.io.KiraMapReader;
+import com.felixklauke.kira.core.io.KiraMapWriter;
 import com.felixklauke.kira.core.mapper.Mapper;
 import com.felixklauke.kira.core.mapper.MapperRegistry;
 import com.felixklauke.kira.core.util.TypeUtils;
@@ -38,7 +38,7 @@ public class MapMapper extends AbstractMapper<Map> {
     }
 
     Map<String, Object> contentMap = new HashMap<>();
-    SimpleKiraReader embeddedKiraReader = new SimpleKiraReader(content);
+    KiraMapReader embeddedKiraReader = new KiraMapReader(content);
 
     // Get generic type
     Class<?>[] genericTypeClasses = TypeUtils.getGenericTypeClasses(genericType);
@@ -64,7 +64,7 @@ public class MapMapper extends AbstractMapper<Map> {
   public void write(KiraWriter kiraWriter, String propertyName, Map model) throws KiraModelException {
 
     Map<String, Object> contentMap = new HashMap<>();
-    KiraWriter embeddedKiraWriter = new SimpleKiraWriter(contentMap);
+    KiraWriter embeddedKiraWriter = new KiraMapWriter(contentMap);
 
     // Write map values
     Set<Map.Entry<String, Object>> entrySet = model.entrySet();

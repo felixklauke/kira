@@ -2,9 +2,9 @@ package com.felixklauke.kira.core.io;
 
 import java.util.Map;
 
-public class SimpleKiraWriter extends KiraIO implements KiraWriter {
+public class KiraMapWriter extends KiraIO implements KiraWriter {
 
-  public SimpleKiraWriter(Map<String, Object> data) {
+  public KiraMapWriter(Map<String, Object> data) {
     super(data);
   }
 

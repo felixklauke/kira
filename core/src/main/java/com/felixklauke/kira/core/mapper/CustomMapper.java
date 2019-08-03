@@ -4,8 +4,8 @@ import com.felixklauke.kira.core.exception.KiraModelException;
 import com.felixklauke.kira.core.exception.KiraModelInstantiationException;
 import com.felixklauke.kira.core.io.KiraReader;
 import com.felixklauke.kira.core.io.KiraWriter;
-import com.felixklauke.kira.core.io.SimpleKiraReader;
-import com.felixklauke.kira.core.io.SimpleKiraWriter;
+import com.felixklauke.kira.core.io.KiraMapReader;
+import com.felixklauke.kira.core.io.KiraMapWriter;
 import com.felixklauke.kira.core.meta.ModelMeta;
 import com.felixklauke.kira.core.meta.ModelMetaRepository;
 import com.felixklauke.kira.core.meta.ModelProperty;
@@ -72,7 +72,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
         continue;
       }
 
-      KiraWriter propertyWriter = new SimpleKiraWriter(data);
+      KiraWriter propertyWriter = new KiraMapWriter(data);
 
       // Obtain corresponding mapper
       Mapper mapper = mapperRegistry.getMapper(propertyType);
@@ -112,7 +112,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
 
     for (ModelProperty property : properties) {
 
-      KiraReader propertyReader = new SimpleKiraReader(data);
+      KiraReader propertyReader = new KiraMapReader(data);
 
       Class propertyType = property.getType();
       Type localGenericType = property.getGenericType();

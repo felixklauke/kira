@@ -2,6 +2,7 @@ package com.felixklauke.kira.core.util;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Objects;
 
 public class TypeUtils {
 
@@ -12,6 +13,8 @@ public class TypeUtils {
    * @return The classes.
    */
   public static Class<?>[] getGenericTypeClasses(Type genericType) {
+
+    Objects.requireNonNull(genericType, "Generic type cannot be null.");
 
     if (!(genericType instanceof ParameterizedType)) {
       throw new IllegalStateException("Can only deserialize map with valid generic types.");

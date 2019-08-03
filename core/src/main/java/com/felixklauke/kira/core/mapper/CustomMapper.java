@@ -35,12 +35,12 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
   /**
    * The manager of all available mappers.
    */
-  private final MapperManager mapperManager;
+  private final MapperRegistry mapperRegistry;
 
-  public CustomMapper(Class<ModelType> modelClass, ModelMetaRepository metaManager, MapperManager mapperManager) {
+  public CustomMapper(Class<ModelType> modelClass, ModelMetaRepository metaManager, MapperRegistry mapperRegistry) {
     this.modelClass = modelClass;
     this.metaManager = metaManager;
-    this.mapperManager = mapperManager;
+    this.mapperRegistry = mapperRegistry;
   }
 
   @Override
@@ -75,7 +75,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
       KiraWriter propertyWriter = new SimpleKiraWriter(data);
 
       // Obtain corresponding mapper
-      Mapper mapper = mapperManager.getMapper(propertyType);
+      Mapper mapper = mapperRegistry.getMapper(propertyType);
       mapper.write(propertyWriter, localPropertyName, propertyValue);
     }
 
@@ -118,7 +118,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
       Type localGenericType = property.getGenericType();
       String localPropertyName = property.getName();
 
-      Mapper mapper = mapperManager.getMapper(propertyType);
+      Mapper mapper = mapperRegistry.getMapper(propertyType);
       Object read = mapper.read(propertyReader, localPropertyName, localGenericType);
 
       property.set(model, read);

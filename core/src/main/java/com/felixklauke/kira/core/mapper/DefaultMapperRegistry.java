@@ -7,12 +7,12 @@ import java.net.URI;
 import java.net.URL;
 import java.util.*;
 
-public class MapperManagerImpl implements MapperManager {
+public class DefaultMapperRegistry implements MapperRegistry {
 
   private final ModelMetaRepository metaManager;
   private final Map<Class<?>, Mapper<?>> mappers;
 
-  public MapperManagerImpl(ModelMetaRepository metaManager, Map<Class<?>, Mapper<?>> mappers) {
+  public DefaultMapperRegistry(ModelMetaRepository metaManager, Map<Class<?>, Mapper<?>> mappers) {
     this.metaManager = metaManager;
     this.mappers = mappers;
 
@@ -46,7 +46,7 @@ public class MapperManagerImpl implements MapperManager {
     mappers.put(Double.class, new DoubleMapper());
   }
 
-  public MapperManagerImpl(ModelMetaRepository metaManager) {
+  public DefaultMapperRegistry(ModelMetaRepository metaManager) {
     this(metaManager, new HashMap<>());
   }
 

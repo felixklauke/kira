@@ -7,7 +7,7 @@ import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.SimpleKiraReader;
 import com.felixklauke.kira.core.io.SimpleKiraWriter;
 import com.felixklauke.kira.core.mapper.Mapper;
-import com.felixklauke.kira.core.mapper.MapperManager;
+import com.felixklauke.kira.core.mapper.MapperRegistry;
 import com.felixklauke.kira.core.util.TypeUtils;
 
 import java.lang.reflect.Type;
@@ -17,10 +17,10 @@ import java.util.Set;
 
 public class MapMapper extends AbstractMapper<Map> {
 
-  private final MapperManager mapperManager;
+  private final MapperRegistry mapperRegistry;
 
-  public MapMapper(MapperManager mapperManager) {
-    this.mapperManager = mapperManager;
+  public MapMapper(MapperRegistry mapperRegistry) {
+    this.mapperRegistry = mapperRegistry;
   }
 
   @Override
@@ -50,7 +50,7 @@ public class MapMapper extends AbstractMapper<Map> {
     Set<Map.Entry<String, Object>> entrySet = content.entrySet();
     for (Map.Entry<String, Object> entry : entrySet) {
       Class<?> genericValueClass = genericTypeClasses[1];
-      Mapper<?> valueMapper = mapperManager.getMapper(genericValueClass);
+      Mapper<?> valueMapper = mapperRegistry.getMapper(genericValueClass);
 
       String key = entry.getKey();
       Object read = valueMapper.read(embeddedKiraReader, key, null);
@@ -70,7 +70,7 @@ public class MapMapper extends AbstractMapper<Map> {
     Set<Map.Entry<String, Object>> entrySet = model.entrySet();
     for (Map.Entry<String, Object> entry : entrySet) {
       Object value = entry.getValue();
-      Mapper valueMapper = mapperManager.getMapper(value.getClass());
+      Mapper valueMapper = mapperRegistry.getMapper(value.getClass());
       String key = entry.getKey();
       valueMapper.write(embeddedKiraWriter, key, value);
     }

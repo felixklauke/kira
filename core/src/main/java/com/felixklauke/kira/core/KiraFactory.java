@@ -1,8 +1,8 @@
 package com.felixklauke.kira.core;
 
 import com.felixklauke.kira.core.mapper.Mapper;
-import com.felixklauke.kira.core.mapper.MapperManager;
-import com.felixklauke.kira.core.mapper.MapperManagerImpl;
+import com.felixklauke.kira.core.mapper.MapperRegistry;
+import com.felixklauke.kira.core.mapper.DefaultMapperRegistry;
 import com.felixklauke.kira.core.meta.ModelMetaRepository;
 import com.felixklauke.kira.core.meta.ReflectionBasedModelMetaRepository;
 
@@ -34,14 +34,14 @@ public class KiraFactory {
 
     // Create dependencies
     ModelMetaRepository modelMetaRepository = new ReflectionBasedModelMetaRepository();
-    MapperManager mapperManager = new MapperManagerImpl(modelMetaRepository);
+    MapperRegistry mapperRegistry = new DefaultMapperRegistry(modelMetaRepository);
 
     // Register mappers
     for (Mapper<?> extraMapper : extraMappers) {
-      mapperManager.addMapper(extraMapper);
+      mapperRegistry.addMapper(extraMapper);
     }
 
     // Construct kira instance
-    return new SimpleKira(mapperManager);
+    return new SimpleKira(mapperRegistry);
   }
 }

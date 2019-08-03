@@ -1,6 +1,6 @@
 package com.felixklauke.kira.core.mapper;
 
-public interface MapperManager {
+public interface MapperRegistry {
 
   <ContentType> void addMapper(Mapper<ContentType> mapper);
 

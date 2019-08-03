@@ -6,7 +6,7 @@ import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.SimpleKiraReader;
 import com.felixklauke.kira.core.io.SimpleKiraWriter;
 import com.felixklauke.kira.core.mapper.Mapper;
-import com.felixklauke.kira.core.mapper.MapperManager;
+import com.felixklauke.kira.core.mapper.MapperRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,18 +29,18 @@ public class SimpleKira implements Kira {
   /**
    * The mapper manager that delivers the right mappers.
    */
-  private final MapperManager mapperManager;
+  private final MapperRegistry mapperRegistry;
 
   /**
    * Create a new kira instance by the underlying mapper manager.
    *
-   * @param mapperManager The mapper manager.
+   * @param mapperRegistry The mapper manager.
    */
-  SimpleKira(MapperManager mapperManager) {
+  SimpleKira(MapperRegistry mapperRegistry) {
 
-    Objects.requireNonNull(mapperManager, "Mapper manager cannot be null.");
+    Objects.requireNonNull(mapperRegistry, "Mapper manager cannot be null.");
 
-    this.mapperManager = mapperManager;
+    this.mapperRegistry = mapperRegistry;
   }
 
   @Override
@@ -50,7 +50,7 @@ public class SimpleKira implements Kira {
 
     // Get mapper
     Class<?> modelClass = model.getClass();
-    Mapper<ModelType> mapper = (Mapper<ModelType>) mapperManager.getMapper(modelClass);
+    Mapper<ModelType> mapper = (Mapper<ModelType>) mapperRegistry.getMapper(modelClass);
 
     // Construct data and writer
     Map<String, Object> data = new HashMap<>();
@@ -78,7 +78,7 @@ public class SimpleKira implements Kira {
     root.put("root", data);
 
     // Get mapper
-    Mapper<ModelType> mapper = mapperManager.getMapper(modelClass);
+    Mapper<ModelType> mapper = mapperRegistry.getMapper(modelClass);
 
     // Construct model and reader
     KiraReader reader = new SimpleKiraReader(root);

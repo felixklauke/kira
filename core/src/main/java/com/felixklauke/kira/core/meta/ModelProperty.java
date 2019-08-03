@@ -4,13 +4,21 @@ import com.felixklauke.kira.core.exception.KiraModelPropertyException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.Objects;
 
 public class ModelProperty<PropertyType> {
 
   private final Field field;
 
-  public ModelProperty(Field field) {
+  private ModelProperty(Field field) {
     this.field = field;
+  }
+
+  static <PropertyType> ModelProperty<PropertyType> createModelProperty(Field field) {
+
+    Objects.requireNonNull(field, "Field cannot be null");
+
+    return new ModelProperty<>(field);
   }
 
   public Class<PropertyType> getType() {
@@ -19,10 +27,6 @@ public class ModelProperty<PropertyType> {
 
   public String getName() {
     return field.getName();
-  }
-
-  public Field getField() {
-    return field;
   }
 
   public Object getValue(Object model) throws KiraModelPropertyException {

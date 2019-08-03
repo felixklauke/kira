@@ -36,7 +36,7 @@ public class ReflectionBasedModelMetaRepository implements ModelMetaRepository {
 
     Field[] declaredFields = modelClass.getDeclaredFields();
     modelProperties = Arrays.stream(declaredFields)
-      .map((Function<Field, ModelProperty>) ModelProperty::new)
+      .map((Function<Field, ModelProperty>) ModelProperty::createModelProperty)
       .collect(Collectors.toList());
 
     return ModelMeta.createModelMeta(modelProperties);

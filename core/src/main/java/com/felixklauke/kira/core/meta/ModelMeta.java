@@ -16,7 +16,7 @@ public class ModelMeta<ModelType> {
     this.properties = properties;
   }
 
-  public static <ModelType> ModelMeta<ModelType> createModelMeta(Collection<ModelProperty> properties) {
+  static <ModelType> ModelMeta<ModelType> createModelMeta(Collection<ModelProperty> properties) {
 
     Objects.requireNonNull(properties, "Properties may not be null.");
 

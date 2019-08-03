@@ -11,9 +11,7 @@ import com.felixklauke.kira.core.meta.ModelMetaRepository;
 import com.felixklauke.kira.core.meta.ModelProperty;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A custom mapper that can map arbitrary objects by working through their properties.
@@ -58,7 +56,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
 
     Map<String, Object> data = new HashMap<>();
 
-    List<ModelProperty> properties = meta.getProperties();
+    Collection<ModelProperty> properties = meta.getProperties();
 
     // Loop through properties
     for (ModelProperty<?> property : properties) {
@@ -108,7 +106,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
     }
 
     // Read properties
-    List<ModelProperty> properties = meta.getProperties();
+    Collection<ModelProperty> properties = meta.getProperties();
 
     for (ModelProperty property : properties) {
 

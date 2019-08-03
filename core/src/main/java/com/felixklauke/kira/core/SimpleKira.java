@@ -38,7 +38,7 @@ public class SimpleKira implements Kira {
    */
   SimpleKira(MapperRegistry mapperRegistry) {
 
-    Objects.requireNonNull(mapperRegistry, "Mapper manager cannot be null.");
+    Objects.requireNonNull(mapperRegistry, "Mapper registry cannot be null.");
 
     this.mapperRegistry = mapperRegistry;
   }

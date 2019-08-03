@@ -5,15 +5,15 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ModelMetaManagerImpl implements ModelMetaManager {
+public class ReflectionBasedModelMetaRepository implements ModelMetaRepository {
 
   private final Map<Class<?>, ModelMeta<?>> meta;
 
-  public ModelMetaManagerImpl(Map<Class<?>, ModelMeta<?>> meta) {
+  public ReflectionBasedModelMetaRepository(Map<Class<?>, ModelMeta<?>> meta) {
     this.meta = meta;
   }
 
-  public ModelMetaManagerImpl() {
+  public ReflectionBasedModelMetaRepository() {
     this(new HashMap<>());
   }
 

@@ -1,7 +1,7 @@
 package com.felixklauke.kira.core.mapper;
 
 import com.felixklauke.kira.core.mapper.standard.*;
-import com.felixklauke.kira.core.meta.ModelMetaManager;
+import com.felixklauke.kira.core.meta.ModelMetaRepository;
 
 import java.net.URI;
 import java.net.URL;
@@ -9,10 +9,10 @@ import java.util.*;
 
 public class MapperManagerImpl implements MapperManager {
 
-  private final ModelMetaManager metaManager;
+  private final ModelMetaRepository metaManager;
   private final Map<Class<?>, Mapper<?>> mappers;
 
-  public MapperManagerImpl(ModelMetaManager metaManager, Map<Class<?>, Mapper<?>> mappers) {
+  public MapperManagerImpl(ModelMetaRepository metaManager, Map<Class<?>, Mapper<?>> mappers) {
     this.metaManager = metaManager;
     this.mappers = mappers;
 
@@ -46,7 +46,7 @@ public class MapperManagerImpl implements MapperManager {
     mappers.put(Double.class, new DoubleMapper());
   }
 
-  public MapperManagerImpl(ModelMetaManager metaManager) {
+  public MapperManagerImpl(ModelMetaRepository metaManager) {
     this(metaManager, new HashMap<>());
   }
 

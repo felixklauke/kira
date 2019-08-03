@@ -3,8 +3,8 @@ package com.felixklauke.kira.core;
 import com.felixklauke.kira.core.mapper.Mapper;
 import com.felixklauke.kira.core.mapper.MapperManager;
 import com.felixklauke.kira.core.mapper.MapperManagerImpl;
-import com.felixklauke.kira.core.meta.ModelMetaManager;
-import com.felixklauke.kira.core.meta.ModelMetaManagerImpl;
+import com.felixklauke.kira.core.meta.ModelMetaRepository;
+import com.felixklauke.kira.core.meta.ReflectionBasedModelMetaRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,8 +33,8 @@ public class KiraFactory {
     Objects.requireNonNull(extraMappers, "Extra mappers list cannot be null.");
 
     // Create dependencies
-    ModelMetaManager modelMetaManager = new ModelMetaManagerImpl();
-    MapperManager mapperManager = new MapperManagerImpl(modelMetaManager);
+    ModelMetaRepository modelMetaRepository = new ReflectionBasedModelMetaRepository();
+    MapperManager mapperManager = new MapperManagerImpl(modelMetaRepository);
 
     // Register mappers
     for (Mapper<?> extraMapper : extraMappers) {

@@ -7,7 +7,7 @@ import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.SimpleKiraReader;
 import com.felixklauke.kira.core.io.SimpleKiraWriter;
 import com.felixklauke.kira.core.meta.ModelMeta;
-import com.felixklauke.kira.core.meta.ModelMetaManager;
+import com.felixklauke.kira.core.meta.ModelMetaRepository;
 import com.felixklauke.kira.core.meta.ModelProperty;
 
 import java.lang.reflect.Type;
@@ -30,14 +30,14 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
   /**
    * The manager of the model meta information.
    */
-  private final ModelMetaManager metaManager;
+  private final ModelMetaRepository metaManager;
 
   /**
    * The manager of all available mappers.
    */
   private final MapperManager mapperManager;
 
-  public CustomMapper(Class<ModelType> modelClass, ModelMetaManager metaManager, MapperManager mapperManager) {
+  public CustomMapper(Class<ModelType> modelClass, ModelMetaRepository metaManager, MapperManager mapperManager) {
     this.modelClass = modelClass;
     this.metaManager = metaManager;
     this.mapperManager = mapperManager;

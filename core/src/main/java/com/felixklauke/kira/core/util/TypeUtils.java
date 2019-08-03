@@ -14,7 +14,7 @@ public class TypeUtils {
   public static Class<?>[] getGenericTypeClasses(Type genericType) {
 
     if (!(genericType instanceof ParameterizedType)) {
-      throw new IllegalStateException("Can only deserialitze map with valid generic types.");
+      throw new IllegalStateException("Can only deserialize map with valid generic types.");
     }
 
     // Infer generic type argument

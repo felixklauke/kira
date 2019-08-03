@@ -19,6 +19,7 @@ public class ReflectionBasedModelMetaRepository implements ModelMetaRepository {
 
   @Override
   public <ModelType> ModelMeta<ModelType> getMeta(Class<ModelType> modelClass) {
+
     ModelMeta<ModelType> modelMeta = (ModelMeta<ModelType>) meta.get(modelClass);
 
     if (modelMeta == null) {
@@ -38,6 +39,6 @@ public class ReflectionBasedModelMetaRepository implements ModelMetaRepository {
       .map((Function<Field, ModelProperty>) ModelProperty::new)
       .collect(Collectors.toList());
 
-    return new ModelMeta<>(modelProperties);
+    return ModelMeta.createModelMeta(modelProperties);
   }
 }

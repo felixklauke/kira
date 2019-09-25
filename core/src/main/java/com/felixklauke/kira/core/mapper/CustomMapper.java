@@ -7,7 +7,7 @@ import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.KiraMapReader;
 import com.felixklauke.kira.core.io.KiraMapWriter;
 import com.felixklauke.kira.core.meta.ModelMeta;
-import com.felixklauke.kira.core.meta.ModelMetaRepository;
+import com.felixklauke.kira.core.meta.ModelMetaRegistry;
 import com.felixklauke.kira.core.meta.ModelProperty;
 
 import java.lang.reflect.Type;
@@ -28,16 +28,16 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
   /**
    * The manager of the model meta information.
    */
-  private final ModelMetaRepository metaManager;
+  private final ModelMetaRegistry metaRepository;
 
   /**
    * The manager of all available mappers.
    */
   private final MapperRegistry mapperRegistry;
 
-  public CustomMapper(Class<ModelType> modelClass, ModelMetaRepository metaManager, MapperRegistry mapperRegistry) {
+  public CustomMapper(Class<ModelType> modelClass, ModelMetaRegistry metaRepository, MapperRegistry mapperRegistry) {
     this.modelClass = modelClass;
-    this.metaManager = metaManager;
+    this.metaRepository = metaRepository;
     this.mapperRegistry = mapperRegistry;
   }
 
@@ -52,11 +52,17 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
 
     // Get meta
     Class<ModelType> modelClass = getModelClass();
-    ModelMeta meta = metaManager.getMeta(modelClass);
+
+    Optional<ModelMeta<ModelType>> metaOptional = metaRepository.getMeta(modelClass);
+    ModelMeta<ModelType> modelMeta = metaOptional.orElseGet(() -> {
+      ModelMeta<ModelType> meta = ModelMeta.fromClass(modelClass);
+      metaRepository.saveMeta(modelClass, meta);
+      return meta;
+    });
 
     Map<String, Object> data = new HashMap<>();
 
-    Collection<ModelProperty> properties = meta.getProperties();
+    Collection<ModelProperty> properties = modelMeta.getProperties();
 
     // Loop through properties
     for (ModelProperty<?> property : properties) {
@@ -92,7 +98,13 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
 
     // Get model meta
     Class<ModelType> modelClass = getModelClass();
-    ModelMeta meta = metaManager.getMeta(modelClass);
+
+    Optional<ModelMeta<ModelType>> metaOptional = metaRepository.getMeta(modelClass);
+    ModelMeta<ModelType> modelMeta = metaOptional.orElseGet(() -> {
+      ModelMeta<ModelType> meta = ModelMeta.fromClass(modelClass);
+      metaRepository.saveMeta(modelClass, meta);
+      return meta;
+    });
 
     // Create model
     ModelType model;
@@ -106,7 +118,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
     }
 
     // Read properties
-    Collection<ModelProperty> properties = meta.getProperties();
+    Collection<ModelProperty> properties = modelMeta.getProperties();
 
     for (ModelProperty property : properties) {
 

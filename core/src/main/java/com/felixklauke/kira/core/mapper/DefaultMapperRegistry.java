@@ -1,7 +1,7 @@
 package com.felixklauke.kira.core.mapper;
 
 import com.felixklauke.kira.core.mapper.standard.*;
-import com.felixklauke.kira.core.meta.ModelMetaRepository;
+import com.felixklauke.kira.core.meta.ModelMetaRegistry;
 
 import java.net.URI;
 import java.net.URL;
@@ -9,10 +9,10 @@ import java.util.*;
 
 public class DefaultMapperRegistry implements MapperRegistry {
 
-  private final ModelMetaRepository metaRepository;
+  private final ModelMetaRegistry metaRepository;
   private final Map<Class<?>, Mapper<?>> mappers;
 
-  public DefaultMapperRegistry(ModelMetaRepository metaRepository, Map<Class<?>, Mapper<?>> mappers) {
+  public DefaultMapperRegistry(ModelMetaRegistry metaRepository, Map<Class<?>, Mapper<?>> mappers) {
     this.metaRepository = metaRepository;
     this.mappers = mappers;
 
@@ -46,7 +46,7 @@ public class DefaultMapperRegistry implements MapperRegistry {
     mappers.put(Double.class, new DoubleMapper());
   }
 
-  public DefaultMapperRegistry(ModelMetaRepository metaRepository) {
+  public DefaultMapperRegistry(ModelMetaRegistry metaRepository) {
     this(metaRepository, new HashMap<>());
   }
 

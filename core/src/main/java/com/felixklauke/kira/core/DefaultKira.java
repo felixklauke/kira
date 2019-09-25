@@ -1,20 +1,20 @@
 package com.felixklauke.kira.core;
 
 import com.felixklauke.kira.core.exception.KiraModelException;
-import com.felixklauke.kira.core.io.KiraReader;
-import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.KiraMapReader;
 import com.felixklauke.kira.core.io.KiraMapWriter;
+import com.felixklauke.kira.core.io.KiraReader;
+import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.mapper.Mapper;
 import com.felixklauke.kira.core.mapper.MapperRegistry;
+import com.google.common.base.Preconditions;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SimpleKira implements Kira {
+public class DefaultKira implements Kira {
 
   /**
    * The name of the pseudo parent map.
@@ -24,7 +24,7 @@ public class SimpleKira implements Kira {
   /**
    * The logger to log general actions.
    */
-  private final Logger logger = Logger.getLogger(SimpleKira.class.getSimpleName());
+  private final Logger logger = Logger.getLogger(DefaultKira.class.getSimpleName());
 
   /**
    * The mapper manager that delivers the right mappers.
@@ -36,17 +36,19 @@ public class SimpleKira implements Kira {
    *
    * @param mapperRegistry The mapper manager.
    */
-  SimpleKira(MapperRegistry mapperRegistry) {
-
-    Objects.requireNonNull(mapperRegistry, "Mapper registry cannot be null.");
-
+  private DefaultKira(MapperRegistry mapperRegistry) {
     this.mapperRegistry = mapperRegistry;
+  }
+
+  static DefaultKira withMapperRegistry(MapperRegistry mapperRegistry) {
+    Preconditions.checkNotNull(mapperRegistry, "Mapper registry should not be null");
+
+    return new DefaultKira(mapperRegistry);
   }
 
   @Override
   public <ModelType> Map<String, Object> serialize(ModelType model) {
-
-    Objects.requireNonNull(model, "Cannot serialize null values.");
+    Preconditions.checkNotNull(model, "Model should not be null");
 
     // Get mapper
     Class<?> modelClass = model.getClass();
@@ -69,9 +71,8 @@ public class SimpleKira implements Kira {
 
   @Override
   public <ModelType> ModelType deserialize(Map<String, Object> data, Class<ModelType> modelClass) {
-
-    Objects.requireNonNull(data, "Data cannot be null.");
-    Objects.requireNonNull(modelClass, "Model class cannot be null.");
+    Preconditions.checkNotNull(data, "Data should not be null");
+    Preconditions.checkNotNull(modelClass, "Model class should not be null");
 
     // Construct root map
     Map<String, Object> root = new HashMap<>();

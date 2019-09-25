@@ -1,14 +1,14 @@
 package com.felixklauke.kira.core;
 
+import com.felixklauke.kira.core.mapper.DefaultMapperRegistry;
 import com.felixklauke.kira.core.mapper.Mapper;
 import com.felixklauke.kira.core.mapper.MapperRegistry;
-import com.felixklauke.kira.core.mapper.DefaultMapperRegistry;
 import com.felixklauke.kira.core.meta.ModelMetaRegistry;
 import com.felixklauke.kira.core.meta.ReflectionBasedModelMetaRegistry;
+import com.google.common.base.Preconditions;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class KiraFactory {
 
@@ -29,8 +29,7 @@ public class KiraFactory {
    * @return The kira instance.
    */
   public static Kira createKira(List<Mapper<?>> extraMappers) {
-
-    Objects.requireNonNull(extraMappers, "Extra mappers list cannot be null.");
+    Preconditions.checkNotNull(extraMappers, "Extra mappers should not be null");
 
     // Create dependencies
     ModelMetaRegistry modelMetaRegistry = new ReflectionBasedModelMetaRegistry();
@@ -42,6 +41,6 @@ public class KiraFactory {
     }
 
     // Construct kira instance
-    return new SimpleKira(mapperRegistry);
+    return DefaultKira.withMapperRegistry(mapperRegistry);
   }
 }

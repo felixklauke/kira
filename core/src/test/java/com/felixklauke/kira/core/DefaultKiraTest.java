@@ -14,7 +14,7 @@ import java.util.StringJoiner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class SimpleKiraTest {
+class DefaultKiraTest {
 
   private static final String TEST_MODEL_NAME = "peter";
   private static final SimpleTestModel TEST_MODEL = new SimpleTestModel(TEST_MODEL_NAME);

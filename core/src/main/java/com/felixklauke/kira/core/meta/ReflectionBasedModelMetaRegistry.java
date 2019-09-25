@@ -2,7 +2,9 @@ package com.felixklauke.kira.core.meta;
 
 import com.google.common.base.Preconditions;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class ReflectionBasedModelMetaRegistry implements ModelMetaRegistry {
 

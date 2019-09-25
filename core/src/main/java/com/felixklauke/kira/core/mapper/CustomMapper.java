@@ -2,16 +2,19 @@ package com.felixklauke.kira.core.mapper;
 
 import com.felixklauke.kira.core.exception.KiraModelException;
 import com.felixklauke.kira.core.exception.KiraModelInstantiationException;
-import com.felixklauke.kira.core.io.KiraReader;
-import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.KiraMapReader;
 import com.felixklauke.kira.core.io.KiraMapWriter;
+import com.felixklauke.kira.core.io.KiraReader;
+import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.meta.ModelMeta;
 import com.felixklauke.kira.core.meta.ModelMetaRegistry;
 import com.felixklauke.kira.core.meta.ModelProperty;
 
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * A custom mapper that can map arbitrary objects by working through their properties.

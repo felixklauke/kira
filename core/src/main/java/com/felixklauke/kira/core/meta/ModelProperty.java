@@ -1,10 +1,10 @@
 package com.felixklauke.kira.core.meta;
 
 import com.felixklauke.kira.core.exception.KiraModelPropertyException;
+import com.google.common.base.Preconditions;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.Objects;
 
 public class ModelProperty<PropertyType> {
 
@@ -15,8 +15,7 @@ public class ModelProperty<PropertyType> {
   }
 
   static <PropertyType> ModelProperty<PropertyType> createModelProperty(Field field) {
-
-    Objects.requireNonNull(field, "Field cannot be null");
+    Preconditions.checkNotNull(field, "Field should not be null");
 
     return new ModelProperty<>(field);
   }

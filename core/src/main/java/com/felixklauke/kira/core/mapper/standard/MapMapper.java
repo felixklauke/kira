@@ -2,10 +2,10 @@ package com.felixklauke.kira.core.mapper.standard;
 
 import com.felixklauke.kira.core.exception.KiraModelException;
 import com.felixklauke.kira.core.exception.KiraModelInvalidGenericsException;
-import com.felixklauke.kira.core.io.KiraReader;
-import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.io.KiraMapReader;
 import com.felixklauke.kira.core.io.KiraMapWriter;
+import com.felixklauke.kira.core.io.KiraReader;
+import com.felixklauke.kira.core.io.KiraWriter;
 import com.felixklauke.kira.core.mapper.Mapper;
 import com.felixklauke.kira.core.mapper.MapperRegistry;
 import com.felixklauke.kira.core.util.TypeUtils;

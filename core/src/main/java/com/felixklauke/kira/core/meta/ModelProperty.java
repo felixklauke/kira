@@ -38,7 +38,7 @@ public class ModelProperty<PropertyType> {
     try {
       return field.get(model);
     } catch (IllegalAccessException e) {
-      throw new KiraModelPropertyException("Couldn't get model property.", e);
+      throw KiraModelPropertyException.withMessageAndCause("Couldn't get model property.", e);
     }
   }
 
@@ -51,7 +51,7 @@ public class ModelProperty<PropertyType> {
     try {
       field.set(model, value);
     } catch (IllegalAccessException e) {
-      throw new KiraModelPropertyException("Couldn't set model property.", e);
+      throw KiraModelPropertyException.withMessageAndCause("Couldn't set model property.", e);
     }
   }
 

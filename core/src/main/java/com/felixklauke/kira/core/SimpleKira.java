@@ -54,7 +54,7 @@ public class SimpleKira implements Kira {
 
     // Construct data and writer
     Map<String, Object> data = new HashMap<>();
-    KiraWriter writer = new KiraMapWriter(data);
+    KiraWriter writer = KiraMapWriter.forData(data);
 
     // Serialize
     try {
@@ -81,7 +81,7 @@ public class SimpleKira implements Kira {
     Mapper<ModelType> mapper = mapperRegistry.getMapper(modelClass);
 
     // Construct model and reader
-    KiraReader reader = new KiraMapReader(root);
+    KiraReader reader = KiraMapReader.forData(root);
 
     try {
       return mapper.read(reader, ROOT_MAP_NAME, modelClass);

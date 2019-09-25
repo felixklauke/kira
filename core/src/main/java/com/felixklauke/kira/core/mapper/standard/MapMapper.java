@@ -38,12 +38,12 @@ public class MapMapper extends AbstractMapper<Map> {
     }
 
     Map<String, Object> contentMap = new HashMap<>();
-    KiraMapReader embeddedKiraReader = new KiraMapReader(content);
+    KiraMapReader embeddedKiraReader = KiraMapReader.forData(content);
 
     // Get generic type
     Class<?>[] genericTypeClasses = TypeUtils.getGenericTypeClasses(genericType);
     if (genericTypeClasses.length != 2) {
-      throw new KiraModelInvalidGenericsException("Couldn't infer generic type of property " + propertyName + ".");
+      throw KiraModelInvalidGenericsException.withMessage("Couldn't infer generic type of property " + propertyName + ".");
     }
 
     // Construct map
@@ -64,7 +64,7 @@ public class MapMapper extends AbstractMapper<Map> {
   public void write(KiraWriter kiraWriter, String propertyName, Map model) throws KiraModelException {
 
     Map<String, Object> contentMap = new HashMap<>();
-    KiraWriter embeddedKiraWriter = new KiraMapWriter(contentMap);
+    KiraWriter embeddedKiraWriter = KiraMapWriter.forData(contentMap);
 
     // Write map values
     Set<Map.Entry<String, Object>> entrySet = model.entrySet();

@@ -76,7 +76,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
         continue;
       }
 
-      KiraWriter propertyWriter = new KiraMapWriter(data);
+      KiraWriter propertyWriter = KiraMapWriter.forData(data);
 
       // Obtain corresponding mapper
       Mapper mapper = mapperRegistry.getMapper(propertyType);
@@ -112,9 +112,9 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
     try {
       model = modelClass.newInstance();
     } catch (InstantiationException e) {
-      throw new KiraModelInstantiationException("Couldn't create model instance. Make sure there is a non-argument constructor available.", e);
+      throw KiraModelInstantiationException.withMessageAndCause("Couldn't create model instance. Make sure there is a non-argument constructor available.", e);
     } catch (IllegalAccessException e) {
-      throw new KiraModelException("Couldn't create model instance.", e);
+      throw KiraModelException.withMessageAndCause("Couldn't create model instance.", e);
     }
 
     // Read properties
@@ -122,7 +122,7 @@ public class CustomMapper<ModelType> implements Mapper<ModelType> {
 
     for (ModelProperty property : properties) {
 
-      KiraReader propertyReader = new KiraMapReader(data);
+      KiraReader propertyReader = KiraMapReader.forData(data);
 
       Class propertyType = property.getType();
       Type localGenericType = property.getGenericType();

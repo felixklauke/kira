@@ -1,0 +1,57 @@
+group = 'com.felixklauke.kira'
+version = '1.0.0-SNAPSHOT'
+
+allprojects {
+  apply plugin: 'java'
+  apply plugin: 'maven-publish'
+  apply plugin: 'checkstyle'
+
+  repositories {
+    mavenLocal()
+    maven {
+      url = 'http://repo.maven.apache.org/maven2'
+    }
+  }
+
+  dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:2.28.2'
+  }
+
+  test {
+    useJUnitPlatform()
+  }
+
+  sourceCompatibility = '11'
+
+  java {
+    withSourcesJar()
+    withJavadocJar()
+  }
+
+  checkstyle {
+    maxWarnings = 0
+    ignoreFailures = false
+    toolVersion '8.27'
+  }
+
+  publishing {
+    publications {
+      maven(MavenPublication) {
+        from(components.java)
+      }
+    }
+    repositories {
+      maven {
+        def releasesRepoUrl = 'https://repository.klauke-enterprises.com/repository/maven-releases/'
+        def snapshotsRepoUrl = 'https://repository.klauke-enterprises.com/repository/maven-snapshots/'
+        url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        credentials {
+          username = System.getenv('NEXUS_USERNAME')
+          password = System.getenv('NEXUS_PASSWORD')
+        }
+      }
+    }
+  }
+}

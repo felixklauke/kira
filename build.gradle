@@ -1,6 +1,11 @@
 group = 'com.felixklauke.kira'
 version = '1.0.0-SNAPSHOT'
 
+buildScan {
+  termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+  termsOfServiceAgree = 'yes'
+}
+
 allprojects {
   apply plugin: 'java'
   apply plugin: 'maven-publish'

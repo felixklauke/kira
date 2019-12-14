@@ -1,4 +1,4 @@
-package com.felixklauke.kira.core.exception;
+package com.felixklauke.kira.core;
 
 import com.google.common.base.Preconditions;
 

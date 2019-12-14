@@ -1,7 +1,6 @@
 package com.felixklauke.kira.core;
 
-import com.felixklauke.kira.core.exception.KiraDeserializationException;
-import com.felixklauke.kira.core.exception.KiraPropertyException;
+import com.felixklauke.kira.core.meta.KiraPropertyException;
 import com.felixklauke.kira.core.meta.ModelMeta;
 import com.felixklauke.kira.core.meta.Property;
 import com.google.common.base.Preconditions;

@@ -2,8 +2,6 @@ package com.felixklauke.kira.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.felixklauke.kira.core.exception.KiraDeserializationException;
-import com.felixklauke.kira.core.exception.KiraSerializationException;
 import com.google.common.base.Objects;
 import java.util.List;
 import java.util.Map;

@@ -1,5 +1,6 @@
-package com.felixklauke.kira.core.exception;
+package com.felixklauke.kira.core.meta;
 
+import com.felixklauke.kira.core.KiraException;
 import com.google.common.base.Preconditions;
 
 public final class KiraPropertyException extends KiraException {

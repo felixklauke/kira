@@ -2,9 +2,9 @@ package com.felixklauke.kira.core.codec;
 
 import com.felixklauke.kira.core.KiraDeserialization;
 import com.felixklauke.kira.core.KiraSerialization;
-import com.felixklauke.kira.core.exception.KiraCodecException;
-import com.felixklauke.kira.core.exception.KiraDeserializationException;
-import com.felixklauke.kira.core.exception.KiraSerializationException;
+import com.felixklauke.kira.core.KiraCodecException;
+import com.felixklauke.kira.core.KiraDeserializationException;
+import com.felixklauke.kira.core.KiraSerializationException;
 import com.felixklauke.kira.core.meta.ModelMeta;
 import com.google.common.base.Preconditions;
 import java.util.Map;

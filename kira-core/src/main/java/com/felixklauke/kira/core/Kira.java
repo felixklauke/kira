@@ -1,7 +1,5 @@
 package com.felixklauke.kira.core;
 
-import com.felixklauke.kira.core.exception.KiraDeserializationException;
-import com.felixklauke.kira.core.exception.KiraSerializationException;
 import java.util.Map;
 
 /**

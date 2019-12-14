@@ -1,6 +1,6 @@
 package com.felixklauke.kira.core.codec;
 
-import com.felixklauke.kira.core.exception.KiraCodecException;
+import com.felixklauke.kira.core.KiraCodecException;
 import com.google.common.base.Preconditions;
 import java.util.function.Function;
 

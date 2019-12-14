@@ -1,9 +1,10 @@
-package com.felixklauke.kira.core.exception;
+package com.felixklauke.kira.core.meta;
 
+import com.felixklauke.kira.core.KiraException;
 import com.google.common.base.Preconditions;
 
-public final class KiraSerializationException extends KiraException {
-  private KiraSerializationException(String message, Throwable cause) {
+public final class KiraModelException extends KiraException {
+  private KiraModelException(String message, Throwable cause) {
     super(message, cause);
   }
 
@@ -14,12 +15,12 @@ public final class KiraSerializationException extends KiraException {
    * @param cause   Root cause.
    * @return Exception instance.
    */
-  public static KiraSerializationException withMessageAndCause(
+  public static KiraModelException withMessageAndCause(
     String message,
     Throwable cause
   ) {
     Preconditions.checkNotNull(message);
     Preconditions.checkNotNull(cause);
-    return new KiraSerializationException(message, cause);
+    return new KiraModelException(message, cause);
   }
 }

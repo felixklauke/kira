@@ -44,6 +44,13 @@ public final class KiraSerialization<ModelT> {
   public Map<String, Object> execute() throws KiraSerializationException {
     Collection<Property<?>> properties = meta.properties();
     Map<String, Object> root = new HashMap<>();
+    return trySerialization(root, properties);
+  }
+
+  private Map<String, Object> trySerialization(
+    Map<String, Object> root,
+    Collection<Property<?>> properties
+  ) throws KiraSerializationException {
     try {
       processProperties(root, properties);
       return root;

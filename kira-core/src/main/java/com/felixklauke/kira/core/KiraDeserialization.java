@@ -55,18 +55,28 @@ public final class KiraDeserialization<ModelT> {
   private ModelT createModelInstanceFromValues(
     Collection<Object> values
   ) throws KiraDeserializationException {
-    List<? extends Class<?>> valueClasses = values.stream()
+    List<? extends Class<?>> valueClasses = extractParameterTypes(values);
+    return tryConstructorCreation(values, valueClasses);
+  }
+
+  private ModelT tryConstructorCreation(
+    Collection<Object> values,
+    List<? extends Class<?>> valueClasses
+  ) throws KiraDeserializationException {
+    var constructorOptional = meta.findConstructor(valueClasses);
+    var constructor = constructorOptional
+      .orElseThrow(() -> KiraDeserializationException
+        .withMessage("Couldn't create model instance: No suitable creation"));
+    return createModelViaQualifiedConstructor(constructor,
+      values);
+  }
+
+  private List<? extends Class<?>> extractParameterTypes(
+    Collection<Object> values
+  ) {
+    return values.stream()
       .map(Object::getClass)
       .collect(Collectors.toList());
-
-    var constructorOptional = meta.findConstructor(valueClasses);
-    if (constructorOptional.isPresent()) {
-      return createModelViaQualifiedConstructor(constructorOptional.get(),
-        values);
-    }
-
-    throw KiraDeserializationException
-      .withMessage("Couldn't create modle instance: No suitable creation");
   }
 
   private ModelT createModelViaQualifiedConstructor(

@@ -23,6 +23,11 @@
   </module>
 
   <module name="TreeWalker">
+    <module name="MethodLength">
+      <property name="tokens" value="METHOD_DEF"/>
+      <property name="max" value="10"/>
+      <property name="countEmpty" value="true"/>
+    </module>
     <module name="OuterTypeFilename"/>
     <module name="IllegalTokenText">
       <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>

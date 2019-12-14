@@ -74,7 +74,7 @@ public final class Property<PropertyT> {
   }
 
   /**
-   * Extract the propery value out of the given model instance.
+   * Extract the property value out of the given model instance.
    *
    * @param value Model instance.
    * @param <ModelT> Generic model type.

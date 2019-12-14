@@ -20,7 +20,7 @@ public final class ModelMetaRegistry {
    * Obtain the meta for a type.
    *
    * @param modelClass Model type.
-   * @param <ModelT> Generic model type.
+   * @param <ModelT>   Generic model type.
    * @return Model meta.
    */
   public <ModelT> ModelMeta<ModelT> forType(Class<ModelT> modelClass) {

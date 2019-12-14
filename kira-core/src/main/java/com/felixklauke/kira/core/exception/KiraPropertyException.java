@@ -2,8 +2,8 @@ package com.felixklauke.kira.core.exception;
 
 import com.google.common.base.Preconditions;
 
-public final class KiraModelException extends KiraException {
-  private KiraModelException(String message, Throwable cause) {
+public final class KiraPropertyException extends KiraException {
+  private KiraPropertyException(String message, Throwable cause) {
     super(message, cause);
   }
 
@@ -14,12 +14,12 @@ public final class KiraModelException extends KiraException {
    * @param cause   Root cause.
    * @return Exception instance.
    */
-  public static KiraModelException withMessageAndCause(
+  public static KiraPropertyException withMessageAndCause(
     String message,
     Throwable cause
   ) {
     Preconditions.checkNotNull(message);
     Preconditions.checkNotNull(cause);
-    return new KiraModelException(message, cause);
+    return new KiraPropertyException(message, cause);
   }
 }

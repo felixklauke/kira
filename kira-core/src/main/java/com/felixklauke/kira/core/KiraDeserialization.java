@@ -1,6 +1,7 @@
 package com.felixklauke.kira.core;
 
 import com.felixklauke.kira.core.exception.KiraDeserializationException;
+import com.felixklauke.kira.core.exception.KiraPropertyException;
 import com.felixklauke.kira.core.meta.ModelMeta;
 import com.felixklauke.kira.core.meta.Property;
 import com.google.common.base.Preconditions;
@@ -107,6 +108,18 @@ public final class KiraDeserialization<ModelT> {
   ) throws KiraDeserializationException {
     var identifier = property.identifier();
     var value = data.get(identifier);
-    return property.deserialize(value);
+    return tryPropertyDeserialization(property, value);
+  }
+
+  private Object tryPropertyDeserialization(
+    Property<?> property,
+    Object value
+  ) throws KiraDeserializationException {
+    try {
+      return property.deserialize(value);
+    } catch (KiraPropertyException e) {
+      throw KiraDeserializationException
+        .withMessageAndCause("Couldn't deserialize property", e);
+    }
   }
 }

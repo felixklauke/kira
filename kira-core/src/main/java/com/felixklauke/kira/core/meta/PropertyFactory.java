@@ -6,13 +6,13 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 public final class PropertyFactory {
-  private final PropertyCodecRegistry codecRegistry;
-  private final Provider<CustomPropertyCodecFactory> customCodecFactory;
+  private final CodecRegistry codecRegistry;
+  private final Provider<CodecFactory> customCodecFactory;
 
   @Inject
   private PropertyFactory(
-    PropertyCodecRegistry codecRegistry,
-    Provider<CustomPropertyCodecFactory> customCodecFactory
+    CodecRegistry codecRegistry,
+    Provider<CodecFactory> customCodecFactory
   ) {
     this.codecRegistry = codecRegistry;
     this.customCodecFactory = customCodecFactory;
@@ -21,7 +21,7 @@ public final class PropertyFactory {
   /**
    * Create a property from a reflective java field.
    *
-   * @param field Field.
+   * @param field       Field.
    * @param <PropertyT> Generic field type.
    * @return ModelProperty.
    */
@@ -30,7 +30,7 @@ public final class PropertyFactory {
   ) {
     Preconditions.checkNotNull(field);
     var identifier = findFieldIdentifier(field);
-    PropertyCodec<PropertyT> codec = findFieldCodec(field);
+    Codec<PropertyT> codec = findFieldCodec(field);
     return Property.of(field, identifier, codec);
   }
 
@@ -38,7 +38,7 @@ public final class PropertyFactory {
     return field.getName();
   }
 
-  private <PropertyT> PropertyCodec<PropertyT> findFieldCodec(
+  private <PropertyT> Codec<PropertyT> findFieldCodec(
     Field field
   ) {
     Class<PropertyT> fieldType = (Class<PropertyT>) field.getType();
@@ -46,7 +46,7 @@ public final class PropertyFactory {
     return codecOptional.orElseGet(() -> createCustomCodec(fieldType));
   }
 
-  private <PropertyT> PropertyCodec<PropertyT> createCustomCodec(
+  private <PropertyT> Codec<PropertyT> createCustomCodec(
     Class<PropertyT> fieldType
   ) {
     return customCodecFactory.get().createCustomCodec(fieldType);

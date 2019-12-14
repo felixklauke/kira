@@ -25,7 +25,7 @@ public final class ModelMeta<ModelT> {
    *
    * @param modelClass Model type.
    * @param properties Model properties.
-   * @param <ModelT> Generic model type.
+   * @param <ModelT>   Generic model type.
    * @return Model meta.
    */
   public static <ModelT> ModelMeta<ModelT> of(

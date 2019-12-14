@@ -19,7 +19,7 @@ public final class ModelMetaFactory {
    * Create model meta from the type of a model.
    *
    * @param modelClass Model type.
-   * @param <ModelT> Generic model type.
+   * @param <ModelT>   Generic model type.
    * @return Model meta.
    */
   public <ModelT> ModelMeta<?> createMeta(Class<ModelT> modelClass) {

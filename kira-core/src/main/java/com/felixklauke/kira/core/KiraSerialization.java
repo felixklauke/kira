@@ -1,6 +1,7 @@
 package com.felixklauke.kira.core;
 
 import com.felixklauke.kira.core.exception.KiraModelException;
+import com.felixklauke.kira.core.exception.KiraPropertyException;
 import com.felixklauke.kira.core.exception.KiraSerializationException;
 import com.felixklauke.kira.core.meta.ModelMeta;
 import com.felixklauke.kira.core.meta.Property;
@@ -21,8 +22,8 @@ public final class KiraSerialization<ModelT> {
   /**
    * Factory method to create a serialization of its basic components.
    *
-   * @param model Model.
-   * @param meta Model meta.
+   * @param model    Model.
+   * @param meta     Model meta.
    * @param <ModelT> Generic model type.
    * @return Model serialization.
    */
@@ -63,7 +64,7 @@ public final class KiraSerialization<ModelT> {
   private void processProperties(
     Map<String, Object> root,
     Collection<Property<?>> properties
-  ) throws KiraSerializationException, KiraModelException {
+  ) throws KiraModelException {
     for (Property<?> property : properties) {
       processProperty(root, property);
     }
@@ -72,9 +73,22 @@ public final class KiraSerialization<ModelT> {
   private void processProperty(
     Map<String, Object> root,
     Property property
-  ) throws KiraModelException, KiraSerializationException {
-    Object propertyValue = property.extractValue(value);
-    Object serializedPropertyValue = property.serialize(propertyValue);
+  ) throws KiraModelException {
+    var propertyValue = property.extractValue(value);
+    var serializedPropertyValue = tryPropertySerialization(property,
+      propertyValue);
     root.put(property.identifier(), serializedPropertyValue);
+  }
+
+  private Object tryPropertySerialization(
+    Property property,
+    Object propertyValue
+  ) throws KiraModelException {
+    try {
+      return property.serialize(propertyValue);
+    } catch (KiraPropertyException e) {
+      throw KiraModelException
+        .withMessageAndCause("Couldn't deserialize property", e);
+    }
   }
 }

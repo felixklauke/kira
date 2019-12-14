@@ -15,7 +15,7 @@ public final class KiraDeserializationException extends KiraException {
    * Create an exception with a message and a root cause.
    *
    * @param message Message.
-   * @param cause Root cause.
+   * @param cause   Root cause.
    * @return Exception instance.
    */
   public static KiraDeserializationException withMessageAndCause(

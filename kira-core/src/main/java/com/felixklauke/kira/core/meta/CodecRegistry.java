@@ -8,12 +8,12 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public final class PropertyCodecRegistry {
-  private final Map<Class<?>, PropertyCodec<?>> codecs;
+public final class CodecRegistry {
+  private final Map<Class<?>, Codec<?>> codecs;
 
   @Inject
-  private PropertyCodecRegistry(
-    Map<Class<?>, PropertyCodec<?>> codecs
+  private CodecRegistry(
+    Map<Class<?>, Codec<?>> codecs
   ) {
     this.codecs = codecs;
   }
@@ -24,28 +24,28 @@ public final class PropertyCodecRegistry {
    * @param codecs Codecs.
    * @return Registry instance.
    */
-  public static PropertyCodecRegistry withCodecs(
-    Map<Class<?>, PropertyCodec<?>> codecs
+  public static CodecRegistry withCodecs(
+    Map<Class<?>, Codec<?>> codecs
   ) {
     Preconditions.checkNotNull(codecs);
-    Map<Class<?>, PropertyCodec<?>> finalCodecs = Maps.newConcurrentMap();
+    Map<Class<?>, Codec<?>> finalCodecs = Maps.newConcurrentMap();
     finalCodecs.putAll(codecs);
-    return new PropertyCodecRegistry(finalCodecs);
+    return new CodecRegistry(finalCodecs);
   }
 
   /**
    * Retrieve codec for a specific type.
    *
-   * @param fieldType Field type.
+   * @param fieldType   Field type.
    * @param <PropertyT> Generic field type.
    * @return Optional of a codec.
    */
-  public <PropertyT> Optional<PropertyCodec<PropertyT>> codec(
+  public <PropertyT> Optional<Codec<PropertyT>> codec(
     Class<PropertyT> fieldType
   ) {
     Preconditions.checkNotNull(fieldType);
     return Optional.ofNullable(
-      (PropertyCodec<PropertyT>) codecs.get(fieldType)
+      (Codec<PropertyT>) codecs.get(fieldType)
     );
   }
 }

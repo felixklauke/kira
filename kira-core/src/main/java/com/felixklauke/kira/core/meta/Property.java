@@ -1,19 +1,19 @@
 package com.felixklauke.kira.core.meta;
 
-import com.felixklauke.kira.core.exception.KiraDeserializationException;
+import com.felixklauke.kira.core.exception.KiraCodecException;
 import com.felixklauke.kira.core.exception.KiraModelException;
-import com.felixklauke.kira.core.exception.KiraSerializationException;
+import com.felixklauke.kira.core.exception.KiraPropertyException;
 import com.google.common.base.Preconditions;
 import java.lang.reflect.Field;
 
 public final class Property<PropertyT> {
   private final Field field;
   private final String identifier;
-  private final PropertyCodec<PropertyT> codec;
+  private final Codec<PropertyT> codec;
 
   private Property(
     Field field, String identifier,
-    PropertyCodec<PropertyT> codec
+    Codec<PropertyT> codec
   ) {
     this.field = field;
     this.identifier = identifier;
@@ -23,16 +23,16 @@ public final class Property<PropertyT> {
   /**
    * Factory method to create a property of its basic components.
    *
-   * @param field Reflective field.
-   * @param identifier Property identifier.
-   * @param codec Property codec.
+   * @param field       Reflective field.
+   * @param identifier  Property identifier.
+   * @param codec       Property codec.
    * @param <PropertyT> Generic property type.
    * @return Property.
    */
   public static <PropertyT> Property<PropertyT> of(
     Field field,
     String identifier,
-    PropertyCodec<PropertyT> codec
+    Codec<PropertyT> codec
   ) {
     Preconditions.checkNotNull(field);
     Preconditions.checkNotNull(identifier);
@@ -54,10 +54,15 @@ public final class Property<PropertyT> {
    *
    * @param value Property instance.
    * @return Serialized data.
-   * @throws KiraSerializationException If the serialization fails.
+   * @throws KiraPropertyException If the serialization fails.
    */
-  public Object serialize(PropertyT value) throws KiraSerializationException {
-    return codec.serialize(value);
+  public Object serialize(PropertyT value) throws KiraPropertyException {
+    try {
+      return codec.serialize(value);
+    } catch (KiraCodecException e) {
+      throw KiraPropertyException
+        .withMessageAndCause("Couldn't serialized property", e);
+    }
   }
 
   /**
@@ -65,18 +70,23 @@ public final class Property<PropertyT> {
    *
    * @param value Serialized data.
    * @return Property instance.
-   * @throws KiraDeserializationException If the deserialization fails.
+   * @throws KiraPropertyException If the deserialization fails.
    */
   public PropertyT deserialize(
     Object value
-  ) throws KiraDeserializationException {
-    return codec.deserialize(value);
+  ) throws KiraPropertyException {
+    try {
+      return codec.deserialize(value);
+    } catch (KiraCodecException e) {
+      throw KiraPropertyException
+        .withMessageAndCause("Couldn't deserialize property", e);
+    }
   }
 
   /**
    * Extract the property value out of the given model instance.
    *
-   * @param value Model instance.
+   * @param value    Model instance.
    * @param <ModelT> Generic model type.
    * @return Property value.
    * @throws KiraModelException If the model can't access the value.

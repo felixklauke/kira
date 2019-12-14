@@ -30,7 +30,7 @@ addons:
   sonarcloud:
     organization: "felixklauke"
     token:
-      secure: "B+/r6YSo//ezn+PpaFhnXtDFUuGAIb60xn5HdCeSQ9yNvJkuBEiVBGkI0hYWKl+51TPlMd6T3zGfpWjOsJQASV2puc1F3MKwK2/c8WUw0gmwKiJYU1w6/g/RmBtD3VHbPESCRGcKA9xliD2kh/+h5TEhtp3Leq8Q8gmoZ2oBxJUYtezrqpBK7xzwWG0EC5BbmScicSgd0yYOssKe5zwGS/pEOhvsQsDJGIDra5UGSTIH2MQrQxmBgMSR4k//pHiHgRfWhjWAJv5y2e0sbdRm+fDPUeNyKqBDpQtc/YVdVXCVQkwJ2rGqVgdgKxGJhMGjYILxK0QnVZq0NOYH7ZvZ2YRkTcWs3S2mvQ46c3MPohyoIHzuiqqPxTUFTyUK4BN4+4v2TLe/Bbk3PObqrsGL9hDq3Joa76rwn0Qv524RTkY+PWb99ccbFMe7QD/62VpUpyy4d5/y5k7arh9GooLeF8/BXOtM8MaA/nkuH61IDxtLsVM2+OpKvovDcjAvhKTO6U+G3G0Ww9IQdtSWwbf/N2mgFsrIn914Dt2XmSO0BKMfajc2hNmJM+6eqbFme8ZsEvLq1qbUWh3yxTpo0P9HyHiVq5IcYX7eboqPZkhlKg/QA2lk8xLOPc+FkOiscqY1lz4qt4ypHsi6fAKouKaLLrwJvvuBgvmgs/N8TaC/nYg=
+      secure: B+/r6YSo//ezn+PpaFhnXtDFUuGAIb60xn5HdCeSQ9yNvJkuBEiVBGkI0hYWKl+51TPlMd6T3zGfpWjOsJQASV2puc1F3MKwK2/c8WUw0gmwKiJYU1w6/g/RmBtD3VHbPESCRGcKA9xliD2kh/+h5TEhtp3Leq8Q8gmoZ2oBxJUYtezrqpBK7xzwWG0EC5BbmScicSgd0yYOssKe5zwGS/pEOhvsQsDJGIDra5UGSTIH2MQrQxmBgMSR4k//pHiHgRfWhjWAJv5y2e0sbdRm+fDPUeNyKqBDpQtc/YVdVXCVQkwJ2rGqVgdgKxGJhMGjYILxK0QnVZq0NOYH7ZvZ2YRkTcWs3S2mvQ46c3MPohyoIHzuiqqPxTUFTyUK4BN4+4v2TLe/Bbk3PObqrsGL9hDq3Joa76rwn0Qv524RTkY+PWb99ccbFMe7QD/62VpUpyy4d5/y5k7arh9GooLeF8/BXOtM8MaA/nkuH61IDxtLsVM2+OpKvovDcjAvhKTO6U+G3G0Ww9IQdtSWwbf/N2mgFsrIn914Dt2XmSO0BKMfajc2hNmJM+6eqbFme8ZsEvLq1qbUWh3yxTpo0P9HyHiVq5IcYX7eboqPZkhlKg/QA2lk8xLOPc+FkOiscqY1lz4qt4ypHsi6fAKouKaLLrwJvvuBgvmgs/N8TaC/nYg=
 
 ###########################
 ### Actual Build Script ###

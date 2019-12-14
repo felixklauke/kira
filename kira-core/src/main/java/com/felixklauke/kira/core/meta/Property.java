@@ -1,5 +1,6 @@
 package com.felixklauke.kira.core.meta;
 
+import com.felixklauke.kira.core.codec.Codec;
 import com.felixklauke.kira.core.exception.KiraCodecException;
 import com.felixklauke.kira.core.exception.KiraModelException;
 import com.felixklauke.kira.core.exception.KiraPropertyException;

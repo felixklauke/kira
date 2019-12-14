@@ -1,4 +1,4 @@
-package com.felixklauke.kira.core.meta;
+package com.felixklauke.kira.core.codec;
 
 import com.felixklauke.kira.core.exception.KiraCodecException;
 import com.google.common.base.Preconditions;

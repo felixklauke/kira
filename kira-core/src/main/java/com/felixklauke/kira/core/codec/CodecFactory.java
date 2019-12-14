@@ -1,5 +1,6 @@
-package com.felixklauke.kira.core.meta;
+package com.felixklauke.kira.core.codec;
 
+import com.felixklauke.kira.core.meta.ModelMetaRegistry;
 import com.google.common.base.Preconditions;
 import javax.inject.Inject;
 

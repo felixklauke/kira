@@ -2,9 +2,9 @@ package com.felixklauke.kira.core.module;
 
 import com.felixklauke.kira.core.Kira;
 import com.felixklauke.kira.core.ReflectedKira;
-import com.felixklauke.kira.core.meta.Codec;
-import com.felixklauke.kira.core.meta.CodecRegistry;
-import com.felixklauke.kira.core.meta.FunctionalCodec;
+import com.felixklauke.kira.core.codec.Codec;
+import com.felixklauke.kira.core.codec.CodecRegistry;
+import com.felixklauke.kira.core.codec.FunctionalCodec;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import java.util.Map;

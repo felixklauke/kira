@@ -1,5 +1,8 @@
 package com.felixklauke.kira.core.meta;
 
+import com.felixklauke.kira.core.codec.Codec;
+import com.felixklauke.kira.core.codec.CodecFactory;
+import com.felixklauke.kira.core.codec.CodecRegistry;
 import com.google.common.base.Preconditions;
 import java.lang.reflect.Field;
 import javax.inject.Inject;

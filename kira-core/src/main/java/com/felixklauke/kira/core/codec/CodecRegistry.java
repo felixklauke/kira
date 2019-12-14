@@ -1,4 +1,4 @@
-package com.felixklauke.kira.core.meta;
+package com.felixklauke.kira.core.codec;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;

@@ -1,20 +1,10 @@
+root = true
+
 [*]
 charset = utf-8
-end_of_line = lf
+indent_size = 2
+indent_style = space
+max_line_length = 80
 trim_trailing_whitespace = true
-insert_final_newline = true
-indent_style = space
-indent_size = 2
-
-[{messages.*, spring.schemas, spring.handlers, messages, *.properties}]
-indent_style = space
-indent_size = 4
-
-[.editorconfig]
-indent_style = space
-indent_size = 4
-
-[{*.yml, *.yaml}]
-indent_style = space
-indent_size = 2
-
+end_of_line = lf
+tab_width = 2

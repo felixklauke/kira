@@ -10,28 +10,47 @@ import java.util.Optional;
 
 public final class ModelMeta<ModelT> {
   private final Class<ModelT> modelClass;
-  private final Collection<ModelProperty<?>> properties;
+  private final Collection<Property<?>> properties;
 
   private ModelMeta(
     Class<ModelT> modelClass,
-    Collection<ModelProperty<?>> properties
+    Collection<Property<?>> properties
   ) {
     this.modelClass = modelClass;
     this.properties = properties;
   }
 
+  /**
+   * Factory method to create model meta by its basic components.
+   *
+   * @param modelClass Model type.
+   * @param properties Model properties.
+   * @param <ModelT> Generic model type.
+   * @return Model meta.
+   */
   public static <ModelT> ModelMeta<ModelT> of(
     Class<ModelT> modelClass,
-    Collection<ModelProperty<?>> properties
+    Collection<Property<?>> properties
   ) {
     Preconditions.checkNotNull(properties);
     return new ModelMeta<>(modelClass, properties);
   }
 
-  public Collection<ModelProperty<?>> properties() {
+  /**
+   * Obtain a collection of properties of the model.
+   *
+   * @return Properties.
+   */
+  public Collection<Property<?>> properties() {
     return Collections.unmodifiableCollection(properties);
   }
 
+  /**
+   * Find a constructor with specific parameter types.
+   *
+   * @param valueClasses Types of parameters.
+   * @return Optional of a constructor.
+   */
   public Optional<Constructor<ModelT>> findConstructor(
     List<? extends Class<?>> valueClasses
   ) {
@@ -54,7 +73,8 @@ public final class ModelMeta<ModelT> {
     return classes;
   }
 
-  private Class<?> resolveClass(List<? extends Class<?>> valueClasses, int index) {
+  private Class<?> resolveClass(List<? extends Class<?>> valueClasses,
+    int index) {
     Class<?> rawClass = valueClasses.get(index);
     if (Primitives.isWrapperType(rawClass)) {
       return Primitives.unwrap(rawClass);

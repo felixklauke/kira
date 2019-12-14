@@ -3,7 +3,7 @@ package com.felixklauke.kira.core;
 import com.felixklauke.kira.core.exception.KiraModelException;
 import com.felixklauke.kira.core.exception.KiraSerializationException;
 import com.felixklauke.kira.core.meta.ModelMeta;
-import com.felixklauke.kira.core.meta.ModelProperty;
+import com.felixklauke.kira.core.meta.Property;
 import com.google.common.base.Preconditions;
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,6 +18,14 @@ public final class KiraSerialization<ModelT> {
     this.meta = meta;
   }
 
+  /**
+   * Factory method to create a serialization of its basic components.
+   *
+   * @param model Model.
+   * @param meta Model meta.
+   * @param <ModelT> Generic model type.
+   * @return Model serialization.
+   */
   public static <ModelT> KiraSerialization<ModelT> of(
     ModelT model,
     ModelMeta<ModelT> meta
@@ -27,29 +35,36 @@ public final class KiraSerialization<ModelT> {
     return new KiraSerialization<>(model, meta);
   }
 
+  /**
+   * Execute the serialization.
+   *
+   * @return The serialized data.
+   * @throws KiraSerializationException If the serialization fails.
+   */
   public Map<String, Object> execute() throws KiraSerializationException {
-    Collection<ModelProperty<?>> properties = meta.properties();
+    Collection<Property<?>> properties = meta.properties();
     Map<String, Object> root = new HashMap<>();
     try {
       processProperties(root, properties);
       return root;
     } catch (KiraModelException e) {
-      throw KiraSerializationException.withMessageAndCause("Couldn't create model", e);
+      throw KiraSerializationException
+        .withMessageAndCause("Couldn't create model", e);
     }
   }
 
   private void processProperties(
     Map<String, Object> root,
-    Collection<ModelProperty<?>> properties
+    Collection<Property<?>> properties
   ) throws KiraSerializationException, KiraModelException {
-    for (ModelProperty<?> property : properties) {
+    for (Property<?> property : properties) {
       processProperty(root, property);
     }
   }
 
   private void processProperty(
     Map<String, Object> root,
-    ModelProperty property
+    Property property
   ) throws KiraModelException, KiraSerializationException {
     Object propertyValue = property.extractValue(value);
     Object serializedPropertyValue = property.serialize(propertyValue);

@@ -22,7 +22,7 @@ public final class ReflectedKira implements Kira {
     throws KiraSerializationException {
     Preconditions.checkNotNull(model);
     Class<ModelT> modelClass = (Class<ModelT>) model.getClass();
-    var meta = metaRegistry.metaForClass(modelClass);
+    var meta = metaRegistry.forType(modelClass);
     return KiraSerialization.of(model, meta).execute();
   }
 
@@ -33,7 +33,7 @@ public final class ReflectedKira implements Kira {
   ) throws KiraDeserializationException {
     Preconditions.checkNotNull(data);
     Preconditions.checkNotNull(modelClass);
-    var meta = metaRegistry.metaForClass(modelClass);
+    var meta = metaRegistry.forType(modelClass);
     return KiraDeserialization.of(data, meta).execute();
   }
 }

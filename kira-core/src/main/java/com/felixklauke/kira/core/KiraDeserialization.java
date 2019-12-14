@@ -2,11 +2,10 @@ package com.felixklauke.kira.core;
 
 import com.felixklauke.kira.core.exception.KiraDeserializationException;
 import com.felixklauke.kira.core.meta.ModelMeta;
-import com.felixklauke.kira.core.meta.ModelProperty;
+import com.felixklauke.kira.core.meta.Property;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,14 @@ public final class KiraDeserialization<ModelT> {
     this.meta = meta;
   }
 
+  /**
+   * Factory method to create a deserialization of its basic components.
+   *
+   * @param data      Serialized data.
+   * @param modelMeta Model meta.
+   * @param <ModelT>  Generic model type.
+   * @return Model Deserialization.
+   */
   public static <ModelT> KiraDeserialization<ModelT> of(
     Map<String, Object> data,
     ModelMeta<ModelT> modelMeta
@@ -33,49 +40,61 @@ public final class KiraDeserialization<ModelT> {
     return new KiraDeserialization<>(data, modelMeta);
   }
 
+  /**
+   * Execute the deserialization.
+   *
+   * @return Model instance.
+   * @throws KiraDeserializationException When the deserialization fails.
+   */
   public ModelT execute() throws KiraDeserializationException {
     var properties = meta.properties();
     var values = processProperties(properties);
     return createModelInstanceFromValues(values);
   }
 
-  private ModelT createModelInstanceFromValues(Collection<Object> values)
-    throws KiraDeserializationException {
+  private ModelT createModelInstanceFromValues(
+    Collection<Object> values
+  ) throws KiraDeserializationException {
     List<? extends Class<?>> valueClasses = values.stream()
       .map(Object::getClass)
       .collect(Collectors.toList());
 
     var constructorOptional = meta.findConstructor(valueClasses);
     if (constructorOptional.isPresent()) {
-      return createModelViaQualifiedConstructor(constructorOptional.get(), values);
+      return createModelViaQualifiedConstructor(constructorOptional.get(),
+        values);
     }
 
-    throw KiraDeserializationException.withMessage("Couldn't create modle instance: No suitable creation");
+    throw KiraDeserializationException
+      .withMessage("Couldn't create modle instance: No suitable creation");
   }
 
   private ModelT createModelViaQualifiedConstructor(
     Constructor<ModelT> constructor,
-    Collection<Object> values) throws KiraDeserializationException {
+    Collection<Object> values
+  ) throws KiraDeserializationException {
     try {
       return constructor.newInstance(values.toArray(new Object[0]));
-    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-      throw KiraDeserializationException.withMessageAndCause("Couldn't create model instance: Couldn't call constructor", e);
+    } catch (ReflectiveOperationException e) {
+      throw KiraDeserializationException.withMessageAndCause(
+        "Couldn't create model instance: Couldn't call constructor", e);
     }
   }
 
   private Collection<Object> processProperties(
-    Collection<ModelProperty<?>> properties
+    Collection<Property<?>> properties
   ) throws KiraDeserializationException {
     var processedProperties = Lists.newArrayList();
-    for (ModelProperty<?> property : properties) {
+    for (Property<?> property : properties) {
       var processedProperty = processProperty(property);
       processedProperties.add(processedProperty);
     }
     return processedProperties;
   }
 
-  private Object processProperty(ModelProperty<?> property)
-    throws KiraDeserializationException {
+  private Object processProperty(
+    Property<?> property
+  ) throws KiraDeserializationException {
     var identifier = property.identifier();
     var value = data.get(identifier);
     return property.deserialize(value);

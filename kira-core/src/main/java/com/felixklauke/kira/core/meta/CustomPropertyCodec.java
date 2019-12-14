@@ -7,20 +7,21 @@ import com.felixklauke.kira.core.exception.KiraSerializationException;
 import com.google.common.base.Preconditions;
 import java.util.Map;
 
-public final class CustomModelPropertyCodec<PropertyT> implements ModelPropertyCodec<PropertyT> {
+public final class CustomPropertyCodec<PropertyT> implements
+  PropertyCodec<PropertyT> {
   private final ModelMeta<PropertyT> meta;
 
-  private CustomModelPropertyCodec(
+  private CustomPropertyCodec(
     ModelMeta<PropertyT> meta
   ) {
     this.meta = meta;
   }
 
-  public static <PropertyT> CustomModelPropertyCodec<PropertyT> withMeta(
+  public static <PropertyT> CustomPropertyCodec<PropertyT> withMeta(
     ModelMeta<PropertyT> meta
   ) {
     Preconditions.checkNotNull(meta);
-    return new CustomModelPropertyCodec<>(meta);
+    return new CustomPropertyCodec<>(meta);
   }
 
   @Override

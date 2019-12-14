@@ -12,13 +12,18 @@ public final class ModelMetaRegistry {
   private final ModelMetaFactory metaFactory;
 
   @Inject
-  private ModelMetaRegistry(
-    ModelMetaFactory metaFactory
-  ) {
+  private ModelMetaRegistry(ModelMetaFactory metaFactory) {
     this.metaFactory = metaFactory;
   }
 
-  public <ModelT> ModelMeta<ModelT> metaForClass(Class<ModelT> modelClass) {
+  /**
+   * Obtain the meta for a type.
+   *
+   * @param modelClass Model type.
+   * @param <ModelT> Generic model type.
+   * @return Model meta.
+   */
+  public <ModelT> ModelMeta<ModelT> forType(Class<ModelT> modelClass) {
     Preconditions.checkNotNull(modelClass);
     ModelMeta<ModelT> modelMeta = (ModelMeta<ModelT>) meta.get(modelClass);
     if (modelMeta == null) {

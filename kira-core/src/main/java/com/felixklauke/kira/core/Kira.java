@@ -17,7 +17,9 @@ public interface Kira {
    * @param <ModelT> The generic type of the model.
    * @return The model as a map.
    */
-  <ModelT> Map<String, Object> serialize(ModelT model) throws KiraSerializationException;
+  <ModelT> Map<String, Object> serialize(
+    ModelT model
+  ) throws KiraSerializationException;
 
   /**
    * Deserialize the given data into a model.

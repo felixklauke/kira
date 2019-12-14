@@ -7,6 +7,13 @@ public final class KiraModelException extends KiraException {
     super(message, cause);
   }
 
+  /**
+   * Create an exception with a message and a root cause.
+   *
+   * @param message Message.
+   * @param cause Root cause.
+   * @return Exception instance.
+   */
   public static KiraModelException withMessageAndCause(
     String message,
     Throwable cause

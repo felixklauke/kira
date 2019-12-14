@@ -1,6 +1,5 @@
 package com.felixklauke.kira.core.exception;
 
-import com.felixklauke.kira.core.Kira;
 import com.google.common.base.Preconditions;
 
 public final class KiraDeserializationException extends KiraException {
@@ -8,10 +7,17 @@ public final class KiraDeserializationException extends KiraException {
     super(message, cause);
   }
 
-  public KiraDeserializationException(String message) {
+  private KiraDeserializationException(String message) {
     super(message);
   }
 
+  /**
+   * Create an exception with a message and a root cause.
+   *
+   * @param message Message.
+   * @param cause Root cause.
+   * @return Exception instance.
+   */
   public static KiraDeserializationException withMessageAndCause(
     String message,
     Throwable cause
@@ -21,6 +27,12 @@ public final class KiraDeserializationException extends KiraException {
     return new KiraDeserializationException(message, cause);
   }
 
+  /**
+   * Create an exception with a message.
+   *
+   * @param message Message.
+   * @return Exception instance.
+   */
   public static KiraDeserializationException withMessage(String message) {
     Preconditions.checkNotNull(message);
     return new KiraDeserializationException(message);

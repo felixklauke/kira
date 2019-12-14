@@ -8,13 +8,20 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 public final class ModelMetaFactory {
-  private final ModelPropertyFactory modelPropertyFactory;
+  private final PropertyFactory propertyFactory;
 
   @Inject
-  private ModelMetaFactory(ModelPropertyFactory modelPropertyFactory) {
-    this.modelPropertyFactory = modelPropertyFactory;
+  private ModelMetaFactory(PropertyFactory propertyFactory) {
+    this.propertyFactory = propertyFactory;
   }
 
+  /**
+   * Create model meta from the type of a model.
+   *
+   * @param modelClass Model type.
+   * @param <ModelT> Generic model type.
+   * @return Model meta.
+   */
   public <ModelT> ModelMeta<?> createMeta(Class<ModelT> modelClass) {
     Preconditions.checkNotNull(modelClass);
     var declaredFields = modelClass.getDeclaredFields();
@@ -25,15 +32,15 @@ public final class ModelMetaFactory {
     Class<ModelT> modelClass,
     Field[] declaredFields
   ) {
-    List<ModelProperty<?>> properties = Arrays.stream(declaredFields)
+    List<Property<?>> properties = Arrays.stream(declaredFields)
       .map(this::decodeProperty)
       .collect(Collectors.toList());
     return ModelMeta.of(modelClass, properties);
   }
 
-  private <PropertyT> ModelProperty<PropertyT> decodeProperty(
+  private <PropertyT> Property<PropertyT> decodeProperty(
     Field declaredField
   ) {
-    return modelPropertyFactory.createProperty(declaredField);
+    return propertyFactory.createProperty(declaredField);
   }
 }

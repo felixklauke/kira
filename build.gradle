@@ -17,10 +17,9 @@ allprojects {
   apply plugin: 'jacoco'
 
   repositories {
+    google()
     mavenLocal()
-    maven {
-      url = 'http://repo.maven.apache.org/maven2'
-    }
+    mavenCentral()
   }
 
   dependencies {

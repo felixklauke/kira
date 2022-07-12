@@ -1,5 +1,7 @@
 plugins {
   id 'java-library'
+  id 'maven-publish'
+  id 'signing'
 }
 
 repositories {
@@ -32,4 +34,32 @@ java {
   targetCompatibility = '18'
   withJavadocJar()
   withSourcesJar()
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      from(components.java)
+      pom {
+        name = 'kira'
+      }
+    }
+  }
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/klauke-enterprises/lexoffice-java-client"
+      credentials {
+        username = System.getenv("GITHUB_ACTOR")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+}
+
+signing {
+  def signingKey = findProperty("GPG_KEY")
+  def signingPassword = findProperty("GPG_KEY_PASSPHRASE")
+  useInMemoryPgpKeys(signingKey, signingPassword)
+  sign publishing.publications.maven
 }

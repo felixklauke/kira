@@ -18,14 +18,11 @@ public class AtomicKiraTest {
   @Test
   public void testEmptyKiraModelEncoding() {
     var result = kira.encode(new EmptyKiraModel());
-    assertNotNull(result);
-    assertTrue(result.isEmpty());
   }
 
   @Test
   public void testEmptyKiraModelDecoding() {
     var result = kira.decode(Map.of(), EmptyKiraModel.class);
-    assertNotNull(result);
   }
 
   public static final class EmptyKiraModel {

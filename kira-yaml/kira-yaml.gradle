@@ -1,4 +1,0 @@
-dependencies {
-  implementation project(':kira-io')
-  implementation 'org.yaml:snakeyaml:1.24'
-}

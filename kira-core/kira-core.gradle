@@ -1,4 +1,0 @@
-dependencies {
-  compile group: 'com.google.inject', name: 'guice', version: '4.2.2'
-  implementation 'com.google.guava:guava:28.1-jre'
-}

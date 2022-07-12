@@ -2,16 +2,4 @@ plugins {
   id "com.gradle.enterprise" version "3.10.3"
 }
 
-rootProject.name = 'kira-parent'
-include(':kira-core')
-include(':kira-yaml')
-include(':kira-json')
-include(':kira-annotations')
-include(':kira-io')
-
-rootProject.children.each { project ->
-  project.buildFileName = "${project.name}.gradle"
-  assert project.projectDir.isDirectory()
-  assert project.buildFile.exists()
-  assert project.buildFile.isFile()
-}
+rootProject.name = 'kira'

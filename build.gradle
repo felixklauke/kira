@@ -2,6 +2,7 @@ plugins {
   id 'java-library'
   id 'maven-publish'
   id 'signing'
+  id 'jacoco'
 }
 
 repositories {
@@ -11,6 +12,18 @@ repositories {
 
 group = 'com.felixklauke'
 version = '0.7.0'
+
+java {
+  sourceCompatibility = '18'
+  targetCompatibility = '18'
+  withJavadocJar()
+  withSourcesJar()
+}
+
+dependencies {
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
 
 jar {
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -29,11 +42,16 @@ testing {
   }
 }
 
-java {
-  sourceCompatibility = '18'
-  targetCompatibility = '18'
-  withJavadocJar()
-  withSourcesJar()
+test {
+  finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+  dependsOn test
+  reports {
+    xml.required = false
+    csv.required = false
+  }
 }
 
 publishing {

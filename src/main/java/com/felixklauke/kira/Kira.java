@@ -1,24 +1,36 @@
 package com.felixklauke.kira;
 
+import com.felixklauke.kira.exception.KiraDeserializationException;
+import com.felixklauke.kira.exception.KiraSerializationException;
 import java.util.Map;
 
-public final class Kira {
-  private Kira() {
+/**
+ * You can serialize objects and deserialize map data from here.
+ *
+ * <p>{@link #serialize(Object)} {@link #deserialize(Map, Class)}
+ */
+public interface Kira {
+  /**
+   * Serialize the given model into a map.
+   *
+   * @param model    The model.
+   * @param <ModelT> The generic type of the model.
+   * @return The model as a map.
+   */
+  <ModelT> Map<String, Object> serialize(
+    ModelT model
+  ) throws KiraSerializationException;
 
-  }
-
-  public static Kira create() {
-    return new Kira();
-  }
-
-  public <ModelType> Map<String, Object> encode(ModelType model) {
-    return null;
-  }
-
-  public <ModelType> ModelType decode(
-    Map<String, Object> model,
-    Class<ModelType> modelType
-  ) {
-    return null;
-  }
+  /**
+   * Deserialize the given data into a model.
+   *
+   * @param data       The data.
+   * @param modelClass The model class.
+   * @param <ModelT>   The generic type of the model.
+   * @return The model.
+   */
+  <ModelT> ModelT deserialize(
+    Map<String, Object> data,
+    Class<ModelT> modelClass
+  ) throws KiraDeserializationException;
 }

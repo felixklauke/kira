@@ -5,6 +5,7 @@ import static java.util.Map.entry;
 import com.felixklauke.kira.Kira;
 import com.felixklauke.kira.ReflectedKira;
 import com.felixklauke.kira.meta.Codec;
+import com.felixklauke.kira.meta.CodecFactory;
 import com.felixklauke.kira.meta.CodecRegistry;
 import com.felixklauke.kira.meta.FunctionalCodec;
 import com.google.inject.AbstractModule;
@@ -64,7 +65,7 @@ public final class KiraModule extends AbstractModule {
   }
 
   @Provides
-  public CodecRegistry provideCodecRegistry() {
-    return CodecRegistry.withCodecs(DEFAULT_CODECS);
+  public CodecRegistry provideCodecRegistry(CodecFactory codecFactory) {
+    return CodecRegistry.withCodecs(DEFAULT_CODECS, codecFactory);
   }
 }

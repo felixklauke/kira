@@ -5,6 +5,7 @@ import com.felixklauke.kira.exception.KiraModelException;
 import com.felixklauke.kira.exception.KiraPropertyException;
 import com.google.common.base.Preconditions;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 public final class Property<PropertyT> {
   private final Field field;
@@ -76,7 +77,7 @@ public final class Property<PropertyT> {
     Object value
   ) throws KiraPropertyException {
     try {
-      return codec.deserialize(value);
+      return codec.deserialize(value, this);
     } catch (KiraCodecException e) {
       throw KiraPropertyException
         .withMessageAndCause("Couldn't deserialize property", e);
@@ -107,5 +108,9 @@ public final class Property<PropertyT> {
     if (!field.canAccess(target)) {
       field.setAccessible(true);
     }
+  }
+
+  public Type genericType() {
+    return field.getGenericType();
   }
 }
